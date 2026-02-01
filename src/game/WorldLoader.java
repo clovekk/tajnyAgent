@@ -5,11 +5,11 @@ public class WorldLoader {
         World world = new World();
         GameData data = GameData.loadGameDataFromResources(resourcePath);
 
-        System.out.println("Items: " + data.items.size());
+        /*System.out.println("Items: " + data.items.size());
         System.out.println("Characters: " + data.characters.size());
         System.out.println("Rooms: " + data.rooms.size());
         System.out.println("Future tasks: " + data.futureTasks.size());
-        System.out.println(data);
+        System.out.println(data);*/
 
         world.setRooms(data.rooms);
         world.setFutureTasks(data.futureTasks);

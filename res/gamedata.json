@@ -70,7 +70,7 @@
       "name": "Tajný tunel",
       "description": "Výchozí místo - tajný podzemní tunel vedoucí z kanalizace do základny odboje. Na jeho konci hlídá jeden hlídač.",
       "adjacentRoomsID": ["room_hall"],
-      "charactersID": ["character_tunnelGuard"],
+      "charactersID": ["character_tunnelGuard", "character_martinStaryAgentPlayer"],
       "itemsID": []
     },
     {
