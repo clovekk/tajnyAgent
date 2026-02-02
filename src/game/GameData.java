@@ -8,10 +8,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class GameData {
-    public ArrayList<Room> rooms;
     public Player player;
+    public ArrayList<Room> rooms;
     public ArrayList<Character> characters;
     public ArrayList<Item> items;
+    public ArrayList<MapItem> mapItems;
     public ArrayList<String> futureTasks;
     public ArrayList<String> hints;
 
@@ -32,10 +33,11 @@ public class GameData {
     @Override
     public String toString() {
         return "GameData{" +
-                "rooms=" + rooms +
-                ", player=" + player +
+                "player=" + player +
+                ", rooms=" + rooms +
                 ", characters=" + characters +
                 ", items=" + items +
+                ", mapItems=" + mapItems +
                 ", futureTasks=" + futureTasks +
                 ", hints=" + hints +
                 '}';

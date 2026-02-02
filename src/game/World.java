@@ -13,11 +13,12 @@ public class World {
     private ArrayList<Character> characters;
     private ArrayList<Room> rooms;
     private int time;
+    private int gameState;
     private Player player;
     private ArrayList<String> hints;
     private boolean end;
 
-    public World(Room currentRoom, ArrayList<String> currentTasks, ArrayList<String> futureTasks, ArrayList<Item> items, ArrayList<Character> characters, ArrayList<Room> rooms, int time, Player player, ArrayList<String> hints, HashMap<String, Command> commands, boolean end) {
+    public World(Room currentRoom, ArrayList<String> currentTasks, ArrayList<String> futureTasks, ArrayList<Item> items, ArrayList<Character> characters, ArrayList<Room> rooms, int time, int gameState, Player player, ArrayList<String> hints, HashMap<String, Command> commands, boolean end) {
         this.currentRoom = currentRoom;
         this.currentTasks = currentTasks;
         this.futureTasks = futureTasks;
@@ -25,6 +26,7 @@ public class World {
         this.characters = characters;
         this.rooms = rooms;
         this.time = time;
+        this.gameState = gameState;
         this.player = player;
         this.hints = hints;
         this.end = end;
@@ -38,6 +40,7 @@ public class World {
         this.characters = new ArrayList<>();
         this.rooms = new ArrayList<>();
         this.time = 0;
+        this.gameState = 0;
         this.player = new Player();
         this.hints = new ArrayList<>();
         this.end = false;
@@ -73,6 +76,9 @@ public class World {
     public ArrayList<Character> getCharacters() {
         return characters;
     }
+    public int getGameState() {
+        return gameState;
+    }
 
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
@@ -104,6 +110,63 @@ public class World {
     public void setCharacters(ArrayList<Character> characters) {
         this.characters = characters;
     }
+    public void setGameState(int gameState) {
+        this.gameState = gameState;
+    }
+
+    public Item getItem(String itemID) {
+        for (Item item : this.items) {
+            if (item.getId().equals(itemID)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public Room getRoom(String roomID) {
+        for (Room room : this.rooms) {
+            if (room.getId().equals(roomID)) {
+                return room;
+            }
+        }
+        return null;
+    }
+
+    public Character getCharacter(String characterID) {
+        for (Character character : this.characters) {
+            if (character.getId().equals(characterID)) {
+                return character;
+            }
+        }
+        return null;
+    }
+
+    public Item getItemByName(String itemName) {
+        for (Item item : this.items) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public Room getRoomByName(String roomName) {
+        for (Room room : this.rooms) {
+            if (room.getName().equalsIgnoreCase(roomName)) {
+                return room;
+            }
+        }
+        return null;
+    }
+
+    public Character getCharacterByName(String characterName) {
+        for (Character character : this.characters) {
+            if (character.getName().equalsIgnoreCase(characterName)) {
+                return character;
+            }
+        }
+        return null;
+    }
 
     public Command readCommand(String command) {
         return null;
@@ -119,6 +182,7 @@ public class World {
                 ", characters=" + characters +
                 ", rooms=" + rooms +
                 ", time=" + time +
+                ", gameState=" + gameState +
                 ", player=" + player +
                 ", hints=" + hints +
                 ", end=" + end +

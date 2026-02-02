@@ -1,15 +1,18 @@
 {
+  "mapItems": [
+    {
+      "id": "item_baseMap",
+      "name": "Mapa základny",
+      "deletable": false,
+      "state": 1,
+      "mappedRoomsID": []
+    }
+  ],
   "items": [
     {
       "id": "item_rudaBook",
       "name": "Kniha",
       "deletable": true,
-      "state": 1
-    },
-    {
-      "id": "item_baseMap",
-      "name": "Mapa základny",
-      "deletable": false,
       "state": 1
     },
     {
@@ -20,48 +23,53 @@
     },
     {
       "id": "item_pistolGun",
-      "name": "Mapa základny",
+      "name": "Pistole",
       "deletable": false,
       "state": 1
     }
   ],
-  "player" :
-  {
+  "player": {
     "id": "character_martinStaryAgentPlayer",
     "name": "Agent Martin Starý",
     "dialogues": ["ams1", "ams2", "ams3"],
-    "inventory": []
+    "inventoryID": ["item_baseMap"]
   },
   "characters": [
     {
       "id": "character_tunnelGuard",
       "name": "Hlídač tunelu",
-      "dialogues": ["tg1", "tg2", "tg3"]
+      "dialogues": ["tg1", "tg2", "tg3"],
+      "mandatoryTalk": false
     },
     {
       "id": "character_mainDoorGuard",
       "name": "Hlídač hlavního vchodu",
-      "dialogues": ["mdg1", "mdg2", "mdg3"]
+      "dialogues": ["mdg1", "mdg2", "mdg3"],
+      "mandatoryTalk": true
     },
     {
       "id": "character_rudaGuard",
       "name": "Hlídač Ruda",
-      "dialogues": ["rg1", "rg2", "rg3"]
+      "dialogues": ["rg1", "rg2", "rg3"],
+      "mandatoryTalk": true
     },
     {
       "id": "character_tomasGuard",
       "name": "Hlídač Tomáš",
-      "dialogues": ["tg1", "tg2", "tg3"]
+      "dialogues": ["tg1", "tg2", "tg3"],
+      "mandatoryTalk": false
     },
     {
       "id": "character_pepaCook",
       "name": "Kuchař Pepa",
-      "dialogues": ["pc1", "pc2", "pc3"]
+      "dialogues": ["pc1", "pc2", "pc3"],
+      "mandatoryTalk": false
     },
     {
       "id": "character_resistanceCommander",
       "name": "Velitel odboje",
-      "dialogues": ["rc1", "rc2", "rc3"]
+      "dialogues": ["rc1", "rc2", "rc3"],
+      "mandatoryTalk": true
     }
   ],
   "rooms": [
@@ -124,7 +132,7 @@
     {
       "id": "room_kitchen",
       "name": "Kuchyně",
-      "description": "Místnost, kde se nachází kuchyně, kde kuchař vaří jídlo pro základnu, a takéjídelna, kam chodí odbojáři jíst.",
+      "description": "Místnost, kde se nachází kuchyně, kde kuchař vaří jídlo pro základnu, a také jídelna, kam chodí odbojáři jíst.",
       "adjacentRoomsID": ["room_hall"],
       "charactersID": ["character_pepaCook"],
       "itemsID": ["item_trashBag"]
@@ -132,7 +140,7 @@
     {
       "id": "room_checkpoint",
       "name": "Místnost s hlídači",
-      "description": "Zdí oddělená část chodby, kde za normálních okolností hlídají dva hlídači, kteříjsou členi osobní ochranky velitele, vchod do pokoje velitele odboje.",
+      "description": "Zdí oddělená část chodby, kde za normálních okolností hlídají dva hlídači, kteří jsou členi osobní ochranky velitele, vchod do pokoje velitele odboje.",
       "adjacentRoomsID": ["room_hall", "room_commanderRoom"],
       "charactersID": ["character_rudaGuard", "character_tomasGuard"],
       "itemsID": []
@@ -140,7 +148,7 @@
     {
       "id": "room_commanderRoom",
       "name": "Pokoj velitele",
-      "description": "Pokoj z kterého velitel řídí odboj a z bezpečnostních důvodů v něm tráví většinusvého času. Má zde svou vlastní koupelnu, postel a také pracovnu, stanicis vysílačkami a skříňku na zbraně. Obyčejným odbojářům je sem vstup zakázán,smí sem pouze osobní ochranka velitele.",
+      "description": "Pokoj z kterého velitel řídí odboj a z bezpečnostních důvodů v něm tráví většinu svého času. Má zde svou vlastní koupelnu, postel a také pracovnu, stanici s vysílačkami a skříňku na zbraně. Obyčejným odbojářům je sem vstup zakázán,smí sem pouze osobní ochranka velitele.",
       "adjacentRoomsID": ["room_checkpoint"],
       "charactersID": ["character_resistanceCommander"],
       "itemsID": []
