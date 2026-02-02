@@ -1,8 +1,8 @@
-import game.UserInterface;
+import game.Game;
 
 public class Main {
     public static void main(String[] args) {
-        UserInterface ui = new UserInterface();
-        ui.display();
+        Game game = new Game();
+        game.run();
     }
 }

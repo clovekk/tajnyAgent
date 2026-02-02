@@ -15,7 +15,6 @@ public class World {
     private int time;
     private Player player;
     private ArrayList<String> hints;
-    private HashMap<String, Command> commands;
     private boolean end;
 
     public World(Room currentRoom, ArrayList<String> currentTasks, ArrayList<String> futureTasks, ArrayList<Item> items, ArrayList<Character> characters, ArrayList<Room> rooms, int time, Player player, ArrayList<String> hints, HashMap<String, Command> commands, boolean end) {
@@ -28,7 +27,6 @@ public class World {
         this.time = time;
         this.player = player;
         this.hints = hints;
-        this.commands = commands;
         this.end = end;
     }
 
@@ -42,7 +40,6 @@ public class World {
         this.time = 0;
         this.player = new Player();
         this.hints = new ArrayList<>();
-        this.commands = new HashMap<>();
         this.end = false;
     }
 
@@ -63,9 +60,6 @@ public class World {
     }
     public ArrayList<String> getHints() {
         return hints;
-    }
-    public HashMap<String, Command> getCommands() {
-        return commands;
     }
     public boolean isEnd() {
         return end;
@@ -98,9 +92,6 @@ public class World {
     public void setHints(ArrayList<String> hints) {
         this.hints = hints;
     }
-    public void setCommands(HashMap<String, Command> commands) {
-        this.commands = commands;
-    }
     public void setEnd(boolean end) {
         this.end = end;
     }
@@ -130,7 +121,6 @@ public class World {
                 ", time=" + time +
                 ", player=" + player +
                 ", hints=" + hints +
-                ", commands=" + commands +
                 ", end=" + end +
                 '}';
     }
