@@ -4,7 +4,6 @@ import Commands.*;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Game {

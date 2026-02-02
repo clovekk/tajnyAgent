@@ -28,6 +28,7 @@ public class MapItem extends Item{
                 ", name='" + name + '\'' +
                 ", deletable=" + deletable +
                 ", state=" + state +
+                ", useText='" + useText + '\'' +
                 '}';
     }
 }

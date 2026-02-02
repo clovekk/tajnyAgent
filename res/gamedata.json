@@ -5,6 +5,7 @@
       "name": "Mapa základny",
       "deletable": false,
       "state": 1,
+      "useText": "bm",
       "mappedRoomsID": []
     }
   ],
@@ -13,19 +14,22 @@
       "id": "item_rudaBook",
       "name": "Kniha",
       "deletable": true,
-      "state": 1
+      "state": 1,
+      "useText": "rb"
     },
     {
       "id": "item_trashBag",
       "name": "Pytel odpadků",
       "deletable": false,
-      "state": 1
+      "state": 1,
+      "useText": "tb"
     },
     {
       "id": "item_pistolGun",
       "name": "Pistole",
       "deletable": false,
-      "state": 1
+      "state": 1,
+      "useText": "pg"
     }
   ],
   "player": {
