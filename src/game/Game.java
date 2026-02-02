@@ -2,34 +2,36 @@ package game;
 
 import Commands.*;
 
+import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Game {
     private World world;
-    private HashMap<String, Command> commands;
+    private ArrayList<String> commands;
 
-    public Game(World world, HashMap<String, Command> commands) {
+    public Game(World world, ArrayList<String> commands) {
         this.world = world;
         this.commands = commands;
     }
 
     public Game() {
         this.world = new World();
-        this.commands = new HashMap<>();
+        this.commands = new ArrayList<>();
     }
 
     public World getWorld() {
         return world;
     }
-    public HashMap<String, Command> getCommands() {
+    public ArrayList<String> getCommands() {
         return commands;
     }
 
     public void setWorld(World world) {
         this.world = world;
     }
-    public void setCommands(HashMap<String, Command> commands) {
+    public void setCommands(ArrayList<String> commands) {
         this.commands = commands;
     }
 
@@ -62,11 +64,45 @@ public class Game {
     }
 
     public void createCommands() {
-        commands.put("konec", new EndCommand(this.world));
-        commands.put("prikazy", new HelpCommand(commands));
-        commands.put("napoveda", new HintCommand(this.world));
-        commands.put("zakresli", new MapOutCommand(this.world));
-        //TODO put all commands with their keys into the hashmap !!! dont put commands into hashmap but into the switch, delete the hashmap asap
+        commands.add("konec");
+        commands.add("prikazy");
+        commands.add("napoveda");
+        commands.add("zakresli");
+        commands.add("jdi");
+        commands.add("seber");
+        commands.add("proheldej");
+        commands.add("spi");
+        commands.add("mluv");
+        commands.add("ukoly");
+        commands.add("zahod");
+        commands.add("pouzij");
+        commands.add("cekej");
+    }
+
+    public ArrayList<String> getPlayerCommand() {
+        Scanner scn = new Scanner(System.in);
+        String consoleInput = "";
+        System.out.print("\nZadej příkaz >>>");
+        consoleInput = scn.nextLine().replaceAll("\\s+", " ").replaceAll("-+", "-").toLowerCase();
+        System.out.println("consoleinput: " + consoleInput); //temporary for testing
+
+        String[] fullCommand = consoleInput.split("-");
+        String firstCommand = fullCommand[0];
+        //accent marks are firstly separated from the text, then they are deleted by replacing all non-ASCII characters with nothing
+        firstCommand = Normalizer.normalize(firstCommand, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+
+        ArrayList<String> splitCommands = new ArrayList<>();
+        splitCommands.add(firstCommand);
+
+        String commandArgument = "";
+        if (fullCommand.length > 1) {
+            commandArgument = fullCommand[1];
+            //accent marks are firstly separated from the text, then they are deleted by replacing all non-ASCII characters with nothing
+            commandArgument = Normalizer.normalize(commandArgument, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+            splitCommands.add(commandArgument);
+        }
+        System.out.println(splitCommands);
+        return splitCommands;
     }
 
     public void run() {
@@ -77,7 +113,7 @@ public class Game {
             //while statement repeats until the user types one of the valid inputs (C/c/N/n),
             //because the condition is a negation of a boolean method, so the condition will only ever
             //not be met if the method returns true, which it only does after a valid input,
-            //that is the reason whz the statement has empty body
+            //that is the reason why the statement has empty body
         }
 
         //temporary test to see if world loaded properly
@@ -85,13 +121,14 @@ public class Game {
 
         while (!this.world.isEnd()) {
             System.out.println("\nAktuální místnost: " + world.getCurrentRoom().getName() + "\n" + world.getCurrentRoom().getDescription());
-            System.out.print("\nZadej příkaz >>>");
-            consoleInput = scn.nextLine();
-            String[] fullCommand = consoleInput.split("-");
-            String firstCommand = fullCommand[0];
+            System.out.println("Postavy v místnosti: " + world.getCurrentRoomCharacterNames());
+            System.out.print(world.currentFoundItemsToString());
+
+            ArrayList<String> splitCommands = getPlayerCommand();
+            String firstCommand = splitCommands.getFirst();
             String commandArgument = "";
-            if (fullCommand.length > 1) {
-                commandArgument = fullCommand[1];
+            if (splitCommands.size() > 1) {
+                commandArgument = splitCommands.get(1);
             }
 
             System.out.println(firstCommand + "\n" + commandArgument);
@@ -122,6 +159,46 @@ public class Game {
                 case "jdi":
                     Command moveCommand = new MoveCommand(this.world, commandArgument);
                     moveCommand.execute();
+                    break;
+
+                case "seber":
+                    Command pickUpCommand = new PickUpCommand(this.world, commandArgument);
+                    pickUpCommand.execute();
+                    break;
+
+                case "prohledej":
+                    Command searchCommand = new SearchCommand(this.world);
+                    searchCommand.execute();
+                    break;
+
+                case "spi":
+                    Command sleepCommand = new SleepCommand(this.world);
+                    sleepCommand.execute();
+                    break;
+
+                case "mluv":
+                    Command talkCommand = new TalkCommand(this.world, commandArgument);
+                    talkCommand.execute();
+                    break;
+
+                case "ukoly":
+                    Command taskListCommand = new TaskListCommand(this.world);
+                    taskListCommand.execute();
+                    break;
+
+                case "zahod":
+                    Command throwAwayCommand = new ThrowAwayCommand(this.world, commandArgument);
+                    throwAwayCommand.execute();
+                    break;
+
+                case "pouzij":
+                    Command useCommand = new UseCommand(this.world, commandArgument);
+                    useCommand.execute();
+                    break;
+
+                case "cekej":
+                    Command waitCommand = new WaitCommand(this.world);
+                    waitCommand.execute();
                     break;
 
                 default:

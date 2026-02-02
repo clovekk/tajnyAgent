@@ -1,18 +1,19 @@
 package Commands;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 //prikazy
 public class HelpCommand implements Command {
-    private HashMap<String, Command> commands;
+    private ArrayList<String> commands;
 
-    public HelpCommand(HashMap<String, Command> commands) {
+    public HelpCommand(ArrayList<String> commands) {
         this.commands = commands;
     }
 
     @Override
     public void execute() {
-        System.out.println(commands.keySet());
+        System.out.println(commands);
         //TODO udelat vic prehledny vypis prikazu i s jejich popisem
     }
 }

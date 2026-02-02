@@ -2,6 +2,7 @@ package game;
 
 import Commands.*;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -166,6 +167,123 @@ public class World {
             }
         }
         return null;
+    }
+
+    public ArrayList<Item> getCurrentRoomItems() {
+        ArrayList<Item> currentItems = new ArrayList<>();
+        for (int i = 0; i < this.getCurrentRoom().getItemsID().size(); i++) {
+            currentItems.add(this.getItem(this.getCurrentRoom().getItemsID().get(i)));
+        }
+        return currentItems;
+    }
+
+    public ArrayList<Character> getCurrentRoomCharacters() {
+        ArrayList<Character> currentCharacters = new ArrayList<>();
+        for (int i = 0; i < this.getCurrentRoom().getCharactersID().size(); i++) {
+            currentCharacters.add(this.getCharacter(this.getCurrentRoom().getCharactersID().get(i)));
+        }
+        return currentCharacters;
+    }
+
+    public ArrayList<String> getCurrentRoomItemNames() {
+        ArrayList<String> itemNames = new ArrayList<>();
+        for (int i = 0; i < this.getCurrentRoom().getItemsID().size(); i++) {
+            itemNames.add(this.getItem(this.getCurrentRoom().getItemsID().get(i)).getName());
+        }
+        return itemNames;
+    }
+
+    public ArrayList<String> getCurrentRoomCharacterNames() {
+        ArrayList<String> characterNames = new ArrayList<>();
+        for (int i = 0; i < this.getCurrentRoom().getCharactersID().size() - 1; i++) {
+            characterNames.add(this.getCharacter(this.getCurrentRoom().getCharactersID().get(i)).getName());
+        }
+        return characterNames;
+    }
+
+    public boolean hasMandatoryTalk(Room room) {
+        boolean hasMandatoryTalk = false;
+        for (int i = 0; i < this.getCurrentRoom().getCharactersID().size() - 1; i++) {
+            if (this.getCharacter(this.getCurrentRoom().getCharactersID().get(i)).isMandatoryTalk()) {
+                hasMandatoryTalk = true;
+            }
+        }
+        return hasMandatoryTalk;
+    }
+
+    public ArrayList<Item> getCurrentRoomFoundItems() {
+        ArrayList<Item> currentFoundItems = this.getCurrentRoomItems();
+        for (int i = 0; i < currentFoundItems.size(); i++) {
+            if (currentFoundItems.get(i).getState() != 2) {
+                currentFoundItems.remove((int)i);
+            }
+        }
+        return currentFoundItems;
+    }
+
+    public ArrayList<String> getCurrentRoomFoundItemNames() {
+        ArrayList<String> currentFoundItemNames = new ArrayList<>();
+        for (int i = 0; i < getCurrentRoomFoundItems().size(); i++) {
+            currentFoundItemNames.add(getCurrentRoomFoundItems().get(i).getName());
+        }
+        return currentFoundItemNames;
+    }
+
+    public String currentFoundItemsToString() {
+        if (!getCurrentRoomFoundItemNames().isEmpty()) {
+            return "Předměty v místnosti: " + getCurrentRoomFoundItemNames() + "\n";
+        } else {
+            return "";
+        }
+    }
+
+    public Room getRoomByCompatibleName(String roomName) {
+        for (Room room : this.rooms) {
+            String compatibleName = Normalizer.normalize(room.getName(), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+            if (compatibleName.equalsIgnoreCase(roomName)) {
+                return room;
+            }
+        }
+        return null;
+    }
+
+    public Character getCharacterByCompatibleName(String characterName) {
+        for (Character character : this.characters) {
+            String compatibleName = Normalizer.normalize(character.getName(), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+            if (compatibleName.equalsIgnoreCase(characterName)) {
+                return character;
+            }
+        }
+        return null;
+    }
+
+    public Item getItemByCompatibleName(String itemName) {
+        for (Item item : this.items) {
+            String compatibleName = Normalizer.normalize(item.getName(), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+            if (compatibleName.equalsIgnoreCase(itemName)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public boolean roomWithCompatibleNameExists(String name) {
+        for (Room room : this.rooms) {
+            String compatibleName = Normalizer.normalize(room.getName(), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+            if (compatibleName.equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<String> adjacentRoomCompatibleNames(String name) {
+        ArrayList<String> adjacentRoomNames = new ArrayList<>();
+        for (int i = 0; i < this.currentRoom.getAdjacentRoomsID().size(); i++) {
+            String adjacentRoomName = Normalizer.normalize(this.currentRoom.getAdjacentRoomsID().get(i), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+            adjacentRoomNames.add(adjacentRoomName);
+        }
+        return adjacentRoomNames;
     }
 
     public Command readCommand(String command) {

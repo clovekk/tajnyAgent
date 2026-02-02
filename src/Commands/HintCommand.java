@@ -2,6 +2,7 @@ package Commands;
 
 import game.*;
 
+//napoveda
 public class HintCommand implements Command {
     private World world;
 

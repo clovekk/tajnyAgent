@@ -1,8 +1,8 @@
 package Commands;
 
-import game.MapItem;
-import game.World;
+import game.*;
 
+//zakresli
 public class MapOutCommand implements Command {
     private World world;
 

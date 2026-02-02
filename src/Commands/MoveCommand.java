@@ -2,29 +2,32 @@ package Commands;
 
 import game.*;
 
+//jdi
 public class MoveCommand implements Command {
     private World world;
     private String newRoomName;
 
-    public MoveCommand(World world, String roomName) {
+    public MoveCommand(World world, String newRoomName) {
         this.world = world;
-        this.newRoomName = roomName;
+        this.newRoomName = newRoomName;
     }
 
     @Override
     public void execute() {
-        if (!world.getRooms().contains(world.getRoomByName(newRoomName))) {
+        if (!world.roomWithCompatibleNameExists(newRoomName)) {
             System.out.println("Neplatný název místnosti");
         } else {
-            Room newRoom = world.getRoomByName(newRoomName);
+            Room newRoom = world.getRoomByCompatibleName(newRoomName);
             if (world.getCurrentRoom().getAdjacentRoomsID().contains(newRoom.getId())) {
-                if (!world.getCurrentRoom().getCharactersID().isEmpty() && world.getCharacter(world.getCurrentRoom().getCharactersID().getFirst()).isMandatoryTalk()) {
+                if (!world.getCurrentRoom().getCharactersID().isEmpty() && world.hasMandatoryTalk(world.getCurrentRoom())) {
                     System.out.println("Vypadá to že by si s tebou chtěl " + world.getCharacter(world.getCurrentRoom().getCharactersID().getFirst()).getName() + " promluvit než tě nechá odejít");
                 } else {
+                    world.getCurrentRoom().getCharactersID().remove(world.getPlayer().getId());
+                    newRoom.getCharactersID().add(world.getPlayer().getId());
                     world.setCurrentRoom(newRoom);
                 }
             } else {
-                System.out.println("Místnost " + newRoomName + " není vedle místnosti " + world.getCurrentRoom() + ", kde se právě nacházíš");
+                System.out.println("Místnost " + newRoomName + " není vedle místnosti " + world.getCurrentRoom().getName() + ", kde se právě nacházíš");
             }
         }
     }

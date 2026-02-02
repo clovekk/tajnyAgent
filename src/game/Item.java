@@ -7,12 +7,14 @@ public class Item {
     protected String name;
     protected boolean deletable;
     protected int state;
+    protected String useText;
 
-    public Item(String id, String name, boolean deletable, int state) {
+    public Item(String id, String name, boolean deletable, int state, String useText) {
         this.id = id;
         this.name = name;
         this.deletable = deletable;
         this.state = state;
+        this.useText = useText;
     }
 
     public Item() {
@@ -20,6 +22,7 @@ public class Item {
         this.name = "unspecified";
         this.deletable = false;
         this.state = 0;
+        this.useText = "unspecified";
     }
 
     public String getId() {
@@ -34,6 +37,9 @@ public class Item {
     public int getState() {
         return state;
     }
+    public String getUseText() {
+        return useText;
+    }
 
     public void setId(String id) {
         this.id = id;
@@ -46,6 +52,9 @@ public class Item {
     }
     public void setState(int state) {
         this.state = state;
+    }
+    public void setUseText(String useText) {
+        this.useText = useText;
     }
 
     public String getItemType(){
@@ -70,6 +79,7 @@ public class Item {
                 ", name='" + name + '\'' +
                 ", deletable=" + deletable +
                 ", state=" + state +
+                ", useText='" + useText + '\'' +
                 '}';
     }
 }
