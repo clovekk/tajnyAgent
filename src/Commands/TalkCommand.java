@@ -22,11 +22,25 @@ public class TalkCommand implements Command {
             if (world.getCurrentRoomCharacters().contains(world.getCharacterByCompatibleName(characterName))) {
                 Character character = world.getCharacterByCompatibleName(characterName);
                 Scanner scn = new Scanner(System.in);
-                System.out.println(character.getDialogues().get(world.getGameState()));
-                System.out.println("Mozne odpovedi: " + world.getPlayer().getDialogues().get(world.getGameState()));
-                int chosenOption = scn.nextInt();
-                System.out.println(world.getPlayer().getDialogues().get(world.getGameState() * 4));
+                System.out.println(character.getDialogues().getFirst());
+                System.out.println("Mozne odpovedi(1-3): " + world.getPlayer().getDialogues().subList(world.getGameState() * 3, world.getGameState() * 3 + 3));
+                int chosenOption = scn.nextInt() - 1;
 
+                if (chosenOption == 2) {
+                    System.out.println(world.getPlayer().getDialogues().get(2 + world.getGameState() * 3));
+                    System.out.println(character.getDialogues().get(chosenOption));
+                    return;
+                }
+
+                for (int i = 0; i < 3; i++) {
+                    if (chosenOption == i) {
+                        System.out.println(world.getPlayer().getDialogues().get(i + world.getGameState() * 3));
+                    }
+                }
+
+                character.getDialogues().removeFirst();
+                System.out.println(character.getDialogues().get(chosenOption));
+                character.setMandatoryTalk(false);
             } else {
                 System.out.println("Postava se jménem " + characterName + " v místnosti není");
             }
