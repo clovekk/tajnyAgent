@@ -12,6 +12,6 @@ public class WaitCommand implements Command {
 
     @Override
     public void execute() {
-        world.setTime(world.getTime() + 24);
+        world.setTime(world.getTime() + 6);
     }
 }

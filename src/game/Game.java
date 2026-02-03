@@ -106,8 +106,6 @@ public class Game {
 
     public void run() {
         createCommands();
-        Scanner scn = new Scanner(System.in);
-        String consoleInput = "";
         while(!worldSelection()) {
             //while statement repeats until the user types one of the valid inputs (C/c/N/n),
             //because the condition is a negation of a boolean method, so the condition will only ever
@@ -115,11 +113,12 @@ public class Game {
             //that is the reason why the statement has empty body
         }
 
-        //temporary test to see if world loaded properly
-        System.out.println(world);
+        System.out.println(world); //temporary test to see if world loaded properly
+        world.getCharacter("character_tunnelGuard").setMandatoryTalk(false); //temp
 
         while (!this.world.isEnd()) {
             System.out.println("\nAktuální místnost: " + world.getCurrentRoom().getName() + "\n" + world.getCurrentRoom().getDescription());
+            System.out.println("Aktuální čas:" + world.getTime() % 24 + "(Celkem uběhlo hodin: " + world.getTime() + ")");
             System.out.println("Postavy v místnosti: " + world.getCurrentRoomCharacterNames());
             System.out.print(world.currentFoundItemsToString());
 

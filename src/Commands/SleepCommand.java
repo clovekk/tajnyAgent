@@ -14,7 +14,12 @@ public class SleepCommand implements Command {
     public void execute() {
         if (world.getCurrentRoom().getId().equalsIgnoreCase("room_beds")) {
             int baseTime = world.getTime() % 24;
-            int sleepTime = 4 + 24 - baseTime;
+            int sleepTime = 0;
+            if (baseTime > 22) {
+                sleepTime = 52 - baseTime;
+            } else {
+                sleepTime = 28 - baseTime;
+            }
             world.setTime(world.getTime() + sleepTime);
             System.out.println("Úspěšně jsi se vyspal");
         } else {

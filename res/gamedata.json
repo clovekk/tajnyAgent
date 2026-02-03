@@ -43,7 +43,7 @@
       "id": "character_tunnelGuard",
       "name": "Hlídač tunelu",
       "dialogues": ["tg1", "tg2", "tg3"],
-      "mandatoryTalk": false
+      "mandatoryTalk": true
     },
     {
       "id": "character_mainDoorGuard",
