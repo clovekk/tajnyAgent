@@ -9,6 +9,27 @@ public class Room {
     private ArrayList<String> adjacentRoomsID;
     private ArrayList<String> charactersID;
     private ArrayList<String> itemsID;
+    private boolean locked;
+
+    public Room(String id, String name, String description, ArrayList<String> adjacentRoomsID, ArrayList<String> charactersID, ArrayList<String> itemsID, boolean locked) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.adjacentRoomsID = adjacentRoomsID;
+        this.charactersID = charactersID;
+        this.itemsID = itemsID;
+        this.locked = locked;
+    }
+
+    public Room() {
+        this.id = "unspecified";
+        this.name = "unspecified";
+        this.description = "unspecified";
+        this.adjacentRoomsID = new ArrayList<>();
+        this.charactersID = new ArrayList<>();
+        this.itemsID = new ArrayList<>();
+        this.locked = false;
+    }
 
     public String getId() {
         return id;
@@ -28,6 +49,9 @@ public class Room {
     public ArrayList<String> getItemsID() {
         return itemsID;
     }
+    public boolean isLocked() {
+        return locked;
+    }
 
     public void setId(String id) {
         this.id = id;
@@ -46,6 +70,9 @@ public class Room {
     }
     public void setItemsID(ArrayList<String> itemsID) {
         this.itemsID = itemsID;
+    }
+    public void setLocked(boolean locked) {
+        this.locked = locked;
     }
 
     public void connectRooms(Room room) {

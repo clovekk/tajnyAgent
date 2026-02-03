@@ -83,7 +83,8 @@
       "description": "Výchozí místo - tajný podzemní tunel vedoucí z kanalizace do základny odboje. Na jeho konci hlídá jeden hlídač.",
       "adjacentRoomsID": ["room_hall"],
       "charactersID": ["character_tunnelGuard", "character_martinStaryAgentPlayer"],
-      "itemsID": []
+      "itemsID": [],
+      "locked" : false
     },
     {
       "id": "room_hall",
@@ -91,7 +92,8 @@
       "description": "Hlavní chodba základny, propojující všechny místnosti, až na místnost velitele.",
       "adjacentRoomsID": ["room_tunnel", "room_mainDoor", "room_beds", "room_bathroom", "room_storage", "room_kitchen", "room_checkpoint"],
       "charactersID": [],
-      "itemsID": []
+      "itemsID": [],
+      "locked" : false
     },
     {
       "id": "room_mainDoor",
@@ -99,7 +101,8 @@
       "description": "Vchodová místnost do budovy, hlídaná jedním hlídačem.",
       "adjacentRoomsID": ["room_hall", "room_street"],
       "charactersID": ["character_mainDoorGuard"],
-      "itemsID": []
+      "itemsID": [],
+      "locked" : false
     },
     {
       "id": "room_street",
@@ -107,7 +110,8 @@
       "description": "Ulice před základnou odboje, vzdalovat se moc od vchodu by bylo přílišč podezřelé.",
       "adjacentRoomsID": ["room_mainDoor"],
       "charactersID": [],
-      "itemsID": []
+      "itemsID": [],
+      "locked" : false
     },
     {
       "id": "room_beds",
@@ -115,7 +119,8 @@
       "description": "Místnost s postelema, kam chodí odbojáři spát a trávit volný čas.",
       "adjacentRoomsID": ["room_hall"],
       "charactersID": [],
-      "itemsID": []
+      "itemsID": [],
+      "locked" : false
     },
     {
       "id": "room_bathroom",
@@ -123,7 +128,8 @@
       "description": "Místnost s kabinkami se záchody, umyvadly a sprchami.",
       "adjacentRoomsID": ["room_hall"],
       "charactersID": [],
-      "itemsID": ["item_rudaBook"]
+      "itemsID": ["item_rudaBook"],
+      "locked" : false
     },
     {
       "id": "room_storage",
@@ -131,7 +137,8 @@
       "description": "Místnost kde se skladují zásoby celé základny a zárověň také zbraně.",
       "adjacentRoomsID": ["room_hall"],
       "charactersID": [],
-      "itemsID": ["item_pistolGun"]
+      "itemsID": ["item_pistolGun"],
+      "locked" : false
     },
     {
       "id": "room_kitchen",
@@ -139,7 +146,8 @@
       "description": "Místnost, kde se nachází kuchyně, kde kuchař vaří jídlo pro základnu, a také jídelna, kam chodí odbojáři jíst.",
       "adjacentRoomsID": ["room_hall"],
       "charactersID": ["character_pepaCook"],
-      "itemsID": ["item_trashBag"]
+      "itemsID": ["item_trashBag"],
+      "locked" : false
     },
     {
       "id": "room_checkpoint",
@@ -147,7 +155,8 @@
       "description": "Zdí oddělená část chodby, kde za normálních okolností hlídají dva hlídači, kteří jsou členi osobní ochranky velitele, vchod do pokoje velitele odboje.",
       "adjacentRoomsID": ["room_hall", "room_commanderRoom"],
       "charactersID": ["character_rudaGuard", "character_tomasGuard"],
-      "itemsID": []
+      "itemsID": [],
+      "locked" : false
     },
     {
       "id": "room_commanderRoom",
@@ -155,7 +164,8 @@
       "description": "Pokoj z kterého velitel řídí odboj a z bezpečnostních důvodů v něm tráví většinu svého času. Má zde svou vlastní koupelnu, postel a také pracovnu, stanici s vysílačkami a skříňku na zbraně. Obyčejným odbojářům je sem vstup zakázán,smí sem pouze osobní ochranka velitele.",
       "adjacentRoomsID": ["room_checkpoint"],
       "charactersID": ["character_resistanceCommander"],
-      "itemsID": []
+      "itemsID": [],
+      "locked" : true
     }
   ],
   "futureTasks": [

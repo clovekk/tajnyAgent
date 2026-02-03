@@ -22,9 +22,13 @@ public class MoveCommand implements Command {
                 if (!world.getCurrentRoom().getCharactersID().isEmpty() && world.hasMandatoryTalk(world.getCurrentRoom())) {
                     System.out.println("Vypadá to že by si s tebou chtěl " + world.getCharacter(world.getCurrentRoom().getCharactersID().getFirst()).getName() + " promluvit než tě nechá odejít");
                 } else {
-                    world.getCurrentRoom().getCharactersID().remove(world.getPlayer().getId());
-                    newRoom.getCharactersID().add(world.getPlayer().getId());
-                    world.setCurrentRoom(newRoom);
+                    if (newRoom.isLocked()) {
+                        System.out.println("Do místnosti " + newRoom.getName() + " tě hlídači nepustí");
+                    } else {
+                        world.getCurrentRoom().getCharactersID().remove(world.getPlayer().getId());
+                        newRoom.getCharactersID().add(world.getPlayer().getId());
+                        world.setCurrentRoom(newRoom);
+                    }
                 }
             } else {
                 System.out.println("Místnost " + newRoomName + " není vedle místnosti " + world.getCurrentRoom().getName() + ", kde se právě nacházíš");
