@@ -320,6 +320,5 @@ public class Game {
             executeCommand(getPlayerCommand());
             updateGameState();
         }
-        //TODO complete game loop
     }
 }
