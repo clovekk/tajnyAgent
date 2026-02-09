@@ -24,11 +24,11 @@ public class TalkCommand implements Command {
                 Player player = world.getPlayer();
                 Scanner scn = new Scanner(System.in);
                 int dialogueCoefficient = getDialogueCoefficient(character);
-                System.out.println("pre: " + dialogueCoefficient);
+                //System.out.println("pre: " + dialogueCoefficient);
                 if (character.getDialogues().get(dialogueCoefficient * 5 + 2).equals("unsp")) {
                     dialogueCoefficient = Integer.parseInt(character.getDialogues().get(1));
                 }
-                System.out.println("aft: " + dialogueCoefficient);
+                //System.out.println("aft: " + dialogueCoefficient);
 
                 if (world.getGameState() == 2 && character.getId().equals("character_rudaGuard") && world.getPlayer().getInventoryID().contains("item_rudaBook")) {
                     System.out.println(character.getName() + ": Díky že jsi tu knihu našel.");
@@ -110,7 +110,7 @@ public class TalkCommand implements Command {
 
     private int getDialogueCoefficient(Character character) {
         int dialogueCoefficient = Integer.parseInt(character.getDialogues().get(1));
-        System.out.println("wor: " + world.getGameState());
+        //System.out.println("wor: " + world.getGameState());
         if (dialogueCoefficient > world.getGameState()) {
             dialogueCoefficient = world.getGameState();
         }
