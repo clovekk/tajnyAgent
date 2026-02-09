@@ -35,14 +35,14 @@
   "player": {
     "id": "character_martinStaryAgentPlayer",
     "name": "Agent Martin Starý",
-    "dialogues": ["ams1", "ams2", "ams3"],
+    "dialogues": ["Počkej chvíli, musím jít.", "unassigned"],
     "inventoryID": ["item_baseMap"]
   },
   "characters": [
     {
       "id": "character_tunnelGuard",
       "name": "Hlídač tunelu",
-      "dialogues": ["tg1", "tg2", "tg3"],
+      "dialogues": ["Tak tu nečum.", "unassigned", "Kdo jsi?", "Pusť mě dál, snad vidíš mou kartu ne?", "Je to napsaný na mý kartě...", "V klidu chlape, jasně, můžeš jít.", "V pořádku, můžeš dál."],
       "mandatoryTalk": true
     },
     {

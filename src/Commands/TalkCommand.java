@@ -2,8 +2,6 @@ package Commands;
 
 import game.*;
 import game.Character;
-
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 //mluv
@@ -21,25 +19,41 @@ public class TalkCommand implements Command {
         if (!world.getCurrentRoomCharacters().isEmpty()) {
             if (world.getCurrentRoomCharacters().contains(world.getCharacterByCompatibleName(characterName))) {
                 Character character = world.getCharacterByCompatibleName(characterName);
+                Player player = world.getPlayer();
                 Scanner scn = new Scanner(System.in);
-                System.out.println(character.getDialogues().getFirst());
-                System.out.println("Mozne odpovedi(1-3): " + world.getPlayer().getDialogues().subList(world.getGameState() * 3, world.getGameState() * 3 + 3));
-                int chosenOption = scn.nextInt() - 1;
+                //just a test, could potentially replace the original dialogues solution
+                //character dialogues list format: (0) = end current dialogue text, (1) = index reserved for potential use, (2 + 5 * gameState) initial character response, (3 + 5 * gameState) first player dialogue option,
+                // (4 + 5 * gameState) second player dialogue option, (5 + 5 * gameState) first character response option, (6 + 5 * gameState) second character response option
+                //example: {"dialogueEnd", "unassigned", "initialResponse", "1stOption", "2ndOption", "1stResponse", "2ndResponse", "initialResponse2", "1stOption2", "2ndOption2", "1stResponse2", "2ndResponse2"}
+                //player dialogues list format: (0) = end current dialogue text, (1) = index reserved for potential use
 
-                if (chosenOption == 2) {
-                    System.out.println(world.getPlayer().getDialogues().get(2 + world.getGameState() * 3));
-                    System.out.println(character.getDialogues().get(chosenOption));
+                try{
+                    System.out.println(character.getName() + ": " + character.getDialogues().get(world.getGameState() * 5 + 2));
+                    System.out.println("Mozne odpovedi(1-3): " + character.getDialogues().subList(world.getGameState() * 5 + 3, world.getGameState() * 5 + 5) + ", " + player.getDialogues().getFirst());
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("S postavou " + character.getName() + " nemáš co si říct");
                     return;
                 }
 
-                for (int i = 0; i < 3; i++) {
-                    if (chosenOption == i) {
-                        System.out.println(world.getPlayer().getDialogues().get(i + world.getGameState() * 3));
-                    }
+                //player chooses dialogue option
+                System.out.print("Zadej číslo odpovědi: ");
+                int chosenOption = scn.nextInt() - 1;
+                while (chosenOption < 0 || chosenOption > 2) {
+                    System.out.println("Neplatné číslo odpovědi");
+                    System.out.print("Zadej číslo odpovědi: ");
+                    chosenOption = scn.nextInt() - 1;
                 }
 
-                character.getDialogues().removeFirst();
-                System.out.println(character.getDialogues().get(chosenOption));
+                //player ended dialogue
+                if (chosenOption == 2) {
+                    System.out.println(player.getName() + ": " + player.getDialogues().getFirst());
+                    System.out.println(character.getName() + ": " + character.getDialogues().getFirst());
+                    return;
+                }
+
+                //player chose an option
+                System.out.println(player.getName() + ": " + character.getDialogues().get(3 + chosenOption + world.getGameState() * 5));
+                System.out.println(character.getName() + ": " + character.getDialogues().get(5 + chosenOption + world.getGameState() * 5));
                 character.setMandatoryTalk(false);
             } else {
                 System.out.println("Postava se jménem " + characterName + " v místnosti není");
