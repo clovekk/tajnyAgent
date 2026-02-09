@@ -11,7 +11,8 @@ public class TaskListCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         System.out.println(world.getCurrentTasks());
+        return "";
     }
 }

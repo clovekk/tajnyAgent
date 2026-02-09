@@ -11,7 +11,7 @@ public class MapOutCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         if (world.getPlayer().hasItem("item_baseMap")) {
             MapItem baseMap = (MapItem) world.getItem("item_baseMap");
             if (!baseMap.getMappedRoomsID().contains(world.getCurrentRoom().getId())) {
@@ -22,5 +22,7 @@ public class MapOutCommand implements Command {
         } else {
             System.out.println("Nemáš u sebe mapu");
         }
+        world.setTime(world.getTime() + 2);
+        return "";
     }
 }

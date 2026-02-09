@@ -11,7 +11,7 @@ public class SleepCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         if (world.getCurrentRoom().getId().equalsIgnoreCase("room_beds")) {
             int baseTime = world.getTime() % 24;
             int sleepTime = 0;
@@ -25,5 +25,6 @@ public class SleepCommand implements Command {
         } else {
             System.out.println("Nejsi v místnosti kde by byla volná postel");
         }
+        return "6";
     }
 }

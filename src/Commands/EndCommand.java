@@ -11,8 +11,9 @@ public class EndCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         world.setEnd(true);
+        return "";
         //TODO dodelat ukladani hry pred ukoncenim programu
     }
 }

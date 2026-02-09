@@ -13,7 +13,7 @@ public class MoveCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         if (!world.roomWithCompatibleNameExists(newRoomName)) {
             System.out.println("Neplatný název místnosti");
         } else {
@@ -34,5 +34,7 @@ public class MoveCommand implements Command {
                 System.out.println("Místnost " + newRoomName + " není vedle místnosti " + world.getCurrentRoom().getName() + ", kde se právě nacházíš");
             }
         }
+        world.setTime(world.getTime() + 1);
+        return "";
     }
 }

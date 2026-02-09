@@ -36,43 +36,44 @@
     "id": "character_martinStaryAgentPlayer",
     "name": "Agent Martin Starý",
     "dialogues": ["Počkej chvíli, musím jít.", "unassigned"],
-    "inventoryID": ["item_baseMap"]
+    "inventoryID": ["item_baseMap"],
+    "suspiciousness": 0
   },
   "characters": [
     {
       "id": "character_tunnelGuard",
       "name": "Hlídač tunelu",
-      "dialogues": ["Tak tu nečum.", "unassigned", "Kdo jsi?", "Pusť mě dál, snad vidíš mou kartu ne?", "Je to napsaný na mý kartě...", "V klidu chlape, jasně, můžeš jít.", "V pořádku, můžeš dál."],
+      "dialogues": ["Tak tu nečum.", "1", "Kdo jsi?", "Pusť mě dál, snad vidíš mou kartu ne?", "Je to napsaný na mý kartě...", "V klidu chlape, jasně, můžeš jít.", "V pořádku, můžeš dál.", "Co chceš?", "Jak je?", "Nechceš pomoct?", "V pohodě.", "Ne."],
       "mandatoryTalk": true
     },
     {
       "id": "character_mainDoorGuard",
       "name": "Hlídač hlavního vchodu",
-      "dialogues": ["mdg1", "mdg2", "mdg3"],
+      "dialogues": ["Tak už jdi", "1", "unsp","unsp","unsp","unsp","unsp", "Co tu děláš?", "Chci ven.", "Jak je?", "To sotva.", "Dobře."],
       "mandatoryTalk": true
     },
     {
       "id": "character_rudaGuard",
       "name": "Hlídač Ruda",
-      "dialogues": ["rg1", "rg2", "rg3"],
+      "dialogues": ["Tak mě neruš.", "6", "unsp","unsp","unsp","unsp","unsp", "Hej ty pojď sem. Ztratil jsem knihu a nemám čas ji najít, najdeš ji prosím?", "Klidně.", "Na to nemám čas.", "Díky.", "Tak si trhni.","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp", "Co je?", "Tomáš venku potřebuje tvou pomoc.", "Tomáš je v nesnázích.", "Jdu tam!", "Hned tam budu!"],
       "mandatoryTalk": true
     },
     {
       "id": "character_tomasGuard",
       "name": "Hlídač Tomáš",
-      "dialogues": ["tg1", "tg2", "tg3"],
+      "dialogues": ["tg1", "2", "tg3"],
       "mandatoryTalk": false
     },
     {
       "id": "character_pepaCook",
       "name": "Kuchař Pepa",
-      "dialogues": ["pc1", "pc2", "pc3"],
+      "dialogues": ["Tak neruš.", "5", "unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp", "Co po mně chceš?", "Chci jít na ulici.", "Nechceš s něčím pomoct?", "Nevim co bys tam dělal...", "Jasně, můžeš vynést odpadky."],
       "mandatoryTalk": false
     },
     {
       "id": "character_resistanceCommander",
       "name": "Velitel odboje",
-      "dialogues": ["rc1", "rc2", "rc3"],
+      "dialogues": ["rc1", "2", "rc3"],
       "mandatoryTalk": true
     }
   ],
@@ -128,7 +129,7 @@
       "description": "Místnost s kabinkami se záchody, umyvadly a sprchami.",
       "adjacentRoomsID": ["room_hall"],
       "charactersID": [],
-      "itemsID": ["item_rudaBook"],
+      "itemsID": [],
       "locked" : false
     },
     {
@@ -146,7 +147,7 @@
       "description": "Místnost, kde se nachází kuchyně, kde kuchař vaří jídlo pro základnu, a také jídelna, kam chodí odbojáři jíst.",
       "adjacentRoomsID": ["room_hall"],
       "charactersID": ["character_pepaCook"],
-      "itemsID": ["item_trashBag"],
+      "itemsID": [],
       "locked" : false
     },
     {
@@ -169,9 +170,9 @@
     }
   ],
   "futureTasks": [
-    "t1",
-    "t2",
-    "t3"
+    "Zmapuj základnu",
+    "Najdi Rudovu knihu",
+    "Dostaň mapu k tajné službě"
   ],
   "hints": [
     "h1",

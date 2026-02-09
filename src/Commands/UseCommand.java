@@ -13,8 +13,12 @@ public class UseCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         if (world.getPlayer().hasItem(world.getItemByCompatibleName(itemName))) {
+            if (world.getCurrentRoom().getId().equals("room_checkpoint") && world.getItemByCompatibleName(itemName).getId().equals("item_pistolGun")) {
+                System.out.println("Zastřelil jsi Rudu a nyní je vchod k veliteli nechráněn");
+                return "7";
+            }
             if (world.getItemByCompatibleName(itemName).getState() != 3) { //state 3 = used
                 world.getItemByCompatibleName(itemName).setState(3);
                 System.out.println(world.getItemByCompatibleName(itemName).getUseText());
@@ -24,5 +28,6 @@ public class UseCommand implements Command {
         } else {
             System.out.println("Tento předmět nemáš");
         }
+        return "";
     }
 }

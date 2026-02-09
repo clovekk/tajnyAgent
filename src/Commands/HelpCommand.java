@@ -12,8 +12,9 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         System.out.println(commands);
+        return "";
         //TODO udelat vic prehledny vypis prikazu i s jejich popisem
     }
 }

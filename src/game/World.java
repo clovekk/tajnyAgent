@@ -277,6 +277,16 @@ public class World {
         return false;
     }
 
+    public boolean itemWithCompatibleNameExists(String name) {
+        for (Item item : this.items) {
+            String compatibleName = Normalizer.normalize(item.getName(), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+            if (compatibleName.equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public ArrayList<String> adjacentRoomCompatibleNames(String name) {
         ArrayList<String> adjacentRoomNames = new ArrayList<>();
         for (int i = 0; i < this.currentRoom.getAdjacentRoomsID().size(); i++) {
@@ -284,6 +294,40 @@ public class World {
             adjacentRoomNames.add(adjacentRoomName);
         }
         return adjacentRoomNames;
+    }
+
+    public Room findRoomWithCharacter(String characterID) {
+        for (Room room : this.rooms) {
+            if (room.getCharactersID().contains(characterID)) {
+                return room;
+            }
+        }
+        return null;
+    }
+
+    public void moveCharacter(String characterID, String roomID) {
+        if (this.getCharacters().contains(getCharacter(characterID)) && this.getRooms().contains(getRoom(roomID))) {
+            Character character = getCharacter(characterID);
+            Room room = getRoom(roomID);
+            findRoomWithCharacter(characterID).getCharactersID().remove(characterID);
+            room.getCharactersID().add(characterID);
+        }
+    }
+
+    public ArrayList<String> getCurrentAdjacentRooms() {
+        ArrayList<String> adjacentRoomNames = new ArrayList<>();
+        for (int i = 0; i < this.getCurrentRoom().getAdjacentRoomsID().size(); i++) {
+            adjacentRoomNames.add(this.getRoom(this.getCurrentRoom().getAdjacentRoomsID().get(i)).getName());
+        }
+        return adjacentRoomNames;
+    }
+
+    public ArrayList<String> getRoomsID() {
+        ArrayList<String> roomsID = new ArrayList<>();
+        for (Room room : this.rooms) {
+            roomsID.add(room.getId());
+        }
+        return roomsID;
     }
 
     public Command readCommand(String command) {

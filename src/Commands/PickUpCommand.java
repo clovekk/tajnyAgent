@@ -13,21 +13,26 @@ public class PickUpCommand implements Command {
     }
 
     @Override
-    public void execute() {
-        if (!world.getCurrentRoomItems().isEmpty() && world.getCurrentRoom().getItemsID().contains(world.getItemByName(itemName).getId())) {
-            Item item = world.getItemByName(itemName);
-            if (item.getState() == 2) {
-                if (world.getPlayer().getInventoryID().size() < 3) {
-                    world.getPlayer().getInventoryID().add(item.getId());
-                    world.getCurrentRoom().getItemsID().remove(item.getId());
+    public String execute() {
+        if (!world.itemWithCompatibleNameExists(itemName)) {
+            System.out.println("Neplatný název předmětu");
+        } else {
+            if (!world.getCurrentRoomItems().isEmpty() && world.getCurrentRoom().getItemsID().contains(world.getItemByCompatibleName(itemName).getId())) {
+                Item item = world.getItemByCompatibleName(itemName);
+                if (item.getState() == 2) {
+                    if (world.getPlayer().getInventoryID().size() < 3) {
+                        world.getPlayer().getInventoryID().add(item.getId());
+                        world.getCurrentRoom().getItemsID().remove(item.getId());
+                    } else {
+                        System.out.println("Nemáš u sebe dostatek místa na sebrání předmětu" + itemName);
+                    }
                 } else {
-                    System.out.println("Nemáš u sebe dostatek místa na sebrání předmětu" + itemName);
+                    System.out.println("Předmět " + itemName + " v místnosti nevidíš");
                 }
             } else {
                 System.out.println("Předmět " + itemName + " v místnosti nevidíš");
             }
-        } else {
-            System.out.println("Předmět " + itemName + " v místnosti nevidíš");
         }
+        return "";
     }
 }

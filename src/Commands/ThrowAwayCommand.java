@@ -13,8 +13,14 @@ public class ThrowAwayCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         if (world.getPlayer().hasItem(world.getItemByCompatibleName(itemName))) {
+            if (world.getItemByCompatibleName(itemName).getId().equals("item_baseMap") && world.getItem("item_baseMap").getState() == 4) {
+                System.out.println("Vyhodil jsi mapu do popelnice, snad ji tajná služba najde");
+                world.getPlayer().getInventoryID().remove("item_baseMap");
+                world.getItem("item_trashBag").setDeletable(true);
+                return "5";
+            }
             if (world.getItemByCompatibleName(itemName).isDeletable()) {
                 world.getPlayer().getInventoryID().remove(world.getItemByCompatibleName(itemName).getId());
                 world.getItems().remove(world.getItemByCompatibleName(itemName));
@@ -25,5 +31,6 @@ public class ThrowAwayCommand implements Command {
         } else {
             System.out.println("Tento předmět neexistuje");
         }
+        return "";
     }
 }

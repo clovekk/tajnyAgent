@@ -11,7 +11,8 @@ public class HintCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         System.out.println(world.getHints().get(world.getGameState()));
+        return "";
     }
 }
