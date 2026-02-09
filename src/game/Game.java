@@ -308,8 +308,9 @@ public class Game {
         }
 
         System.out.println(world); //temporary test to see if world loaded properly
-        //world.getCharacter("character_tunnelGuard").setMandatoryTalk(false); //temp
-        //world.getCharacter("character_rudaGuard").setMandatoryTalk(false); //temp
+        world.getCharacter("character_tunnelGuard").setMandatoryTalk(false); //temp
+        world.getCharacter("character_rudaGuard").setMandatoryTalk(false); //temp
+        //world.getPlayer().getInventoryID().add("item_trashBag"); //temp
 
         while (!this.world.isEnd()) {
             System.out.println("\nAktuální místnost: " + world.getCurrentRoom().getName() + "\n" + world.getCurrentRoom().getDescription());

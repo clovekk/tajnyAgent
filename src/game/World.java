@@ -195,8 +195,10 @@ public class World {
 
     public ArrayList<String> getCurrentRoomCharacterNames() {
         ArrayList<String> characterNames = new ArrayList<>();
-        for (int i = 0; i < this.getCurrentRoom().getCharactersID().size() - 1; i++) {
-            characterNames.add(this.getCharacter(this.getCurrentRoom().getCharactersID().get(i)).getName());
+        for (int i = 0; i < this.getCurrentRoom().getCharactersID().size(); i++) {
+            if (!this.getCurrentRoom().getCharactersID().get(i).equals("character_martinStaryAgentPlayer")) {
+                characterNames.add(this.getCharacter(this.getCurrentRoom().getCharactersID().get(i)).getName());
+            }
         }
         return characterNames;
     }
@@ -204,7 +206,7 @@ public class World {
     public boolean hasMandatoryTalk(Room room) {
         boolean hasMandatoryTalk = false;
         for (int i = 0; i < this.getCurrentRoom().getCharactersID().size() - 1; i++) {
-            if (this.getCharacter(this.getCurrentRoom().getCharactersID().get(i)).isMandatoryTalk()) {
+            if (!this.getCurrentRoom().getCharactersID().get(i).equals("character_martinStaryAgentPlayer") && this.getCharacter(this.getCurrentRoom().getCharactersID().get(i)).isMandatoryTalk()) {
                 hasMandatoryTalk = true;
             }
         }

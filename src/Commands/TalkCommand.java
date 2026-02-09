@@ -40,11 +40,6 @@ public class TalkCommand implements Command {
                     System.out.println(character.getName() + ": Tudy nikam jít nemůžeš!");
                     System.out.println(player.getName() + ": Promiň, spletl jsem si dveře.");
                     return "4";
-                } else {
-                    if (player.getInventoryID().contains("item_trashBag")) {
-                        character.setMandatoryTalk(false);
-
-                    }
                 }
 
                 if (character.getId().equals("character_rudaGuard") && world.getGameState() == 6) {
