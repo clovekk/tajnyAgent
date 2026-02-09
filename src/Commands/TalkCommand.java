@@ -17,7 +17,7 @@ public class TalkCommand implements Command {
     @Override
     public void execute() {
         if (!world.getCurrentRoomCharacters().isEmpty()) {
-            if (world.getCurrentRoomCharacters().contains(world.getCharacterByCompatibleName(characterName))) {
+            if (world.getCurrentRoomCharacters().contains(world.getCharacterByCompatibleName(characterName)) && world.getCharacterByCompatibleName(characterName) != null) {
                 Character character = world.getCharacterByCompatibleName(characterName);
                 Player player = world.getPlayer();
                 Scanner scn = new Scanner(System.in);
@@ -36,11 +36,11 @@ public class TalkCommand implements Command {
                 }
 
                 //player chooses dialogue option
-                System.out.print("Zadej číslo odpovědi: ");
+                System.out.print("Zadej číslo odpovědi >>>");
                 int chosenOption = scn.nextInt() - 1;
                 while (chosenOption < 0 || chosenOption > 2) {
                     System.out.println("Neplatné číslo odpovědi");
-                    System.out.print("Zadej číslo odpovědi: ");
+                    System.out.print("Zadej číslo odpovědi >>>");
                     chosenOption = scn.nextInt() - 1;
                 }
 
