@@ -80,6 +80,9 @@ public class Game {
         }
     }
 
+    /**
+     * Adds all commands to the commands ArrayList
+     */
     public void createCommands() {
         commands.add("konec");
         commands.add("prikazy");
@@ -96,6 +99,12 @@ public class Game {
         commands.add("cekej");
     }
 
+    /**
+     * Asks the player for a command in the console, the input is then split into the two possible parts,
+     * that a command can have and both of them are then normalized, and have white space replaced by one space
+     * and if there are multiple dashes next to each other they are combined into one
+     * @return an ArrayList with the two possible commands parts, in the order {firstCommand, commandArgument}
+     */
     public ArrayList<String> getPlayerCommand() {
         Scanner scn = new Scanner(System.in);
         String consoleInput = "";
@@ -122,6 +131,10 @@ public class Game {
         return splitCommands;
     }
 
+    /**
+     * Executes the command that the player input, if such command exists in the switch
+     * @param splitCommands ArrayList with the correct format of the player command {firstCommand, commandArgument}
+     */
     public void executeCommand(ArrayList<String> splitCommands) {
         String firstCommand = splitCommands.getFirst();
         String commandArgument = "";
@@ -205,6 +218,9 @@ public class Game {
         }
     }
 
+    /**
+     * Updates the state of the game according to the current situation, serves as the main way of controlling the story line
+     */
     public void updateGameState() {
         int gameState = world.getGameState();
         if (gameState == 0 && !world.getCurrentTasks().contains("Zmapuj základnu")) {
@@ -298,6 +314,9 @@ public class Game {
         }
     }
 
+    /**
+     * Runs the game, firstly world is selected and then the main game loop repeats until the game ends
+     */
     public void run() {
         createCommands();
         while(!worldSelection()) {

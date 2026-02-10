@@ -115,6 +115,11 @@ public class World {
         this.gameState = gameState;
     }
 
+    /**
+     * Finds the item with the corresponding itemID, the world must contain this item in order to be able to reach it
+     * @param itemID the ID of the item in a String form
+     * @return the item that has this itemID, ensure that every item has a unique ID
+     */
     public Item getItem(String itemID) {
         for (Item item : this.items) {
             if (item.getId().equals(itemID)) {
@@ -124,6 +129,11 @@ public class World {
         return null;
     }
 
+    /**
+     * Finds the room with the corresponding roomID, the world must contain this room in order to be able to reach it
+     * @param roomID the ID of the room in a String form
+     * @return the room that has this roomID, ensure that every room has a unique ID
+     */
     public Room getRoom(String roomID) {
         for (Room room : this.rooms) {
             if (room.getId().equals(roomID)) {
@@ -133,6 +143,11 @@ public class World {
         return null;
     }
 
+    /**
+     * Finds the character with the corresponding characterID, the world must contain this character in order to be able to reach it
+     * @param characterID the ID of the character in a String form
+     * @return the character that has this characterID, ensure that every character has a unique ID
+     */
     public Character getCharacter(String characterID) {
         for (Character character : this.characters) {
             if (character.getId().equals(characterID)) {
@@ -142,6 +157,8 @@ public class World {
         return null;
     }
 
+    //old methods that can only find the element by its precise name, replaced with the get____ByCompatibleName() methods
+    /*
     public Item getItemByName(String itemName) {
         for (Item item : this.items) {
             if (item.getName().equalsIgnoreCase(itemName)) {
@@ -168,7 +185,12 @@ public class World {
         }
         return null;
     }
+    */
 
+    /**
+     * Finds all the items in the currentRoom and puts them into an ArrayList
+     * @return an ArrayList of all the items in the currentRoom
+     */
     public ArrayList<Item> getCurrentRoomItems() {
         ArrayList<Item> currentItems = new ArrayList<>();
         for (int i = 0; i < this.getCurrentRoom().getItemsID().size(); i++) {
@@ -177,6 +199,10 @@ public class World {
         return currentItems;
     }
 
+    /**
+     * Finds all the characters in the currentRoom and puts them into an ArrayList
+     * @return an ArrayList of all the characters in the currentRoom
+     */
     public ArrayList<Character> getCurrentRoomCharacters() {
         ArrayList<Character> currentCharacters = new ArrayList<>();
         for (int i = 0; i < this.getCurrentRoom().getCharactersID().size(); i++) {
@@ -185,6 +211,10 @@ public class World {
         return currentCharacters;
     }
 
+    /**
+     * Finds all the items in the currentRoom and puts their names into an ArrayList
+     * @return an ArrayList of all the item names in the currentRoom
+     */
     public ArrayList<String> getCurrentRoomItemNames() {
         ArrayList<String> itemNames = new ArrayList<>();
         for (int i = 0; i < this.getCurrentRoom().getItemsID().size(); i++) {
@@ -193,6 +223,10 @@ public class World {
         return itemNames;
     }
 
+    /**
+     * Finds all the characters in the currentRoom and puts their names into an ArrayList
+     * @return an ArrayList of all the character names in the currentRoom
+     */
     public ArrayList<String> getCurrentRoomCharacterNames() {
         ArrayList<String> characterNames = new ArrayList<>();
         for (int i = 0; i < this.getCurrentRoom().getCharactersID().size(); i++) {
@@ -203,16 +237,25 @@ public class World {
         return characterNames;
     }
 
+    /**
+     * Finds out if the chosen room has a character that has the mandatoryTalk parameter set to true, this doesn't count the player
+     * @param room the room to check
+     * @return -true if the rooms has a character with mandatoryTalk == True <br>-false if the room doesn't have a character with mandatoryTalk == True
+     */
     public boolean hasMandatoryTalk(Room room) {
         boolean hasMandatoryTalk = false;
-        for (int i = 0; i < this.getCurrentRoom().getCharactersID().size() - 1; i++) {
-            if (!this.getCurrentRoom().getCharactersID().get(i).equals("character_martinStaryAgentPlayer") && this.getCharacter(this.getCurrentRoom().getCharactersID().get(i)).isMandatoryTalk()) {
+        for (int i = 0; i < room.getCharactersID().size() - 1; i++) {
+            if (!room.getCharactersID().get(i).equals("character_martinStaryAgentPlayer") && this.getCharacter(room.getCharactersID().get(i)).isMandatoryTalk()) {
                 hasMandatoryTalk = true;
             }
         }
         return hasMandatoryTalk;
     }
 
+    /**
+     * Finds all the items in the currentRoom with state 2 which mean they have been found by the player
+     * @return an ArrayList of all the items with state == 2 in the current rooms
+     */
     public ArrayList<Item> getCurrentRoomFoundItems() {
         ArrayList<Item> currentFoundItems = this.getCurrentRoomItems();
         for (int i = 0; i < currentFoundItems.size(); i++) {
@@ -223,6 +266,10 @@ public class World {
         return currentFoundItems;
     }
 
+    /**
+     * Finds the names of all the items in the currentRoom with state 2 which mean they have been found by the player
+     * @return an ArrayList of all the names of items with state == 2 in the current rooms
+     */
     public ArrayList<String> getCurrentRoomFoundItemNames() {
         ArrayList<String> currentFoundItemNames = new ArrayList<>();
         for (int i = 0; i < getCurrentRoomFoundItems().size(); i++) {
@@ -231,6 +278,10 @@ public class World {
         return currentFoundItemNames;
     }
 
+    /**
+     * Returns a print-ready version of the found items in the currentRoom ArrayList
+     * @return a print-ready version of the found items in the currentRoom ArrayList
+     */
     public String currentFoundItemsToString() {
         if (!getCurrentRoomFoundItemNames().isEmpty()) {
             return "Předměty v místnosti: " + getCurrentRoomFoundItemNames() + "\n";
@@ -239,6 +290,11 @@ public class World {
         }
     }
 
+    /**
+     * Finds the room with the corresponding name, the world must contain this room in order to be able to reach it
+     * @param roomName the name of the room in a String form, the name doesn't have to be normalized because the method does it
+     * @return the room that has this name, ensure that every room has a unique name
+     */
     public Room getRoomByCompatibleName(String roomName) {
         for (Room room : this.rooms) {
             String compatibleName = Normalizer.normalize(room.getName(), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
@@ -249,6 +305,11 @@ public class World {
         return null;
     }
 
+    /**
+     * Finds the character with the corresponding name, the world must contain this character in order to be able to reach it
+     * @param characterName the name of the character in a String form, the name doesn't have to be normalized because the method does it
+     * @return the character that has this name, ensure that every character has a unique name
+     */
     public Character getCharacterByCompatibleName(String characterName) {
         for (Character character : this.characters) {
             String compatibleName = Normalizer.normalize(character.getName(), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
@@ -259,6 +320,11 @@ public class World {
         return null;
     }
 
+    /**
+     * Finds the item with the corresponding name, the world must contain this item in order to be able to reach it
+     * @param itemName the name of the item in a String form, the name doesn't have to be normalized because the method does it
+     * @return the item that has this name, ensure that every item has a unique name
+     */
     public Item getItemByCompatibleName(String itemName) {
         for (Item item : this.items) {
             String compatibleName = Normalizer.normalize(item.getName(), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
@@ -269,6 +335,11 @@ public class World {
         return null;
     }
 
+    /**
+     * Checks if a room with this name exists, the name doesn't have to be normalized because method does it
+     * @param name the name of the room in String form, doesn't have to be normalized
+     * @return -true if the room exists <br>-false if the room doesn't exist
+     */
     public boolean roomWithCompatibleNameExists(String name) {
         for (Room room : this.rooms) {
             String compatibleName = Normalizer.normalize(room.getName(), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
@@ -279,6 +350,11 @@ public class World {
         return false;
     }
 
+    /**
+     * Checks if an item with this name exists, the name doesn't have to be normalized because method does it
+     * @param name the name of the item in String form, doesn't have to be normalized
+     * @return -true if the item exists <br>-false if the item doesn't exist
+     */
     public boolean itemWithCompatibleNameExists(String name) {
         for (Item item : this.items) {
             String compatibleName = Normalizer.normalize(item.getName(), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
@@ -289,15 +365,25 @@ public class World {
         return false;
     }
 
-    public ArrayList<String> adjacentRoomCompatibleNames(String name) {
+    /**
+     * Find the normalized names of all the adjacent rooms to the chosen room
+     * @param room the chosen room to check the adjacent rooms
+     * @return an ArrayList of the normalized names of the rooms adjacent to the chosen room
+     */
+    public ArrayList<String> adjacentRoomCompatibleNames(Room room) {
         ArrayList<String> adjacentRoomNames = new ArrayList<>();
-        for (int i = 0; i < this.currentRoom.getAdjacentRoomsID().size(); i++) {
-            String adjacentRoomName = Normalizer.normalize(this.currentRoom.getAdjacentRoomsID().get(i), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+        for (int i = 0; i < room.getAdjacentRoomsID().size(); i++) {
+            String adjacentRoomName = Normalizer.normalize(room.getAdjacentRoomsID().get(i), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
             adjacentRoomNames.add(adjacentRoomName);
         }
         return adjacentRoomNames;
     }
 
+    /**
+     * Find a room containing a character with the selected characterID
+     * @param characterID ID of the character that the method will be checking for
+     * @return the room with the chosen character, null if it doesn't exist
+     */
     public Room findRoomWithCharacter(String characterID) {
         for (Room room : this.rooms) {
             if (room.getCharactersID().contains(characterID)) {
@@ -307,6 +393,11 @@ public class World {
         return null;
     }
 
+    /**
+     * Moves the chosen character from its current room to the chosen room
+     * @param characterID the ID of the chosen character
+     * @param roomID the ID of the chosen room to move to
+     */
     public void moveCharacter(String characterID, String roomID) {
         if (this.getCharacters().contains(getCharacter(characterID)) && this.getRooms().contains(getRoom(roomID))) {
             Character character = getCharacter(characterID);
@@ -316,6 +407,10 @@ public class World {
         }
     }
 
+    /**
+     * Find all the adjacent rooms and returns their names
+     * @return an ArrayList of the names of all the adjacent rooms
+     */
     public ArrayList<String> getCurrentAdjacentRooms() {
         ArrayList<String> adjacentRoomNames = new ArrayList<>();
         for (int i = 0; i < this.getCurrentRoom().getAdjacentRoomsID().size(); i++) {
@@ -324,6 +419,10 @@ public class World {
         return adjacentRoomNames;
     }
 
+    /**
+     * Returns the IDs of all the rooms the world contains
+     * @return an ArrayList of all the room IDs of all the rooms that the world contains
+     */
     public ArrayList<String> getRoomsID() {
         ArrayList<String> roomsID = new ArrayList<>();
         for (Room room : this.rooms) {
@@ -332,6 +431,7 @@ public class World {
         return roomsID;
     }
 
+    //unused
     public Command readCommand(String command) {
         return null;
     }
