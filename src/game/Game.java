@@ -62,7 +62,6 @@ public class Game {
 
         switch (consoleInput.toUpperCase()) {
             case "C":
-                //TODO write a method that loads a saved game
                 wl = new WorldLoader();
                 world = wl.loadSavedWorld("saves/savedGame.json");
                 return true;
@@ -70,6 +69,9 @@ public class Game {
             case "N":
                 wl = new WorldLoader();
                 world = wl.loadNewWorld("/gamedata.json");
+                System.out.println("Člen státní tajné služby, agent Martin Starý, se nachází před vchodem do tajného\n" +
+                        "podzemního tunelu využívaného protistátním odbojem a má za úkol\n" +
+                        "v přestrojení proniknout do jádra základny odboje");
                 return true;
 
             default:
@@ -108,7 +110,7 @@ public class Game {
         String consoleInput = "";
         System.out.print("\nZadej příkaz >>>");
         consoleInput = scn.nextLine().replaceAll("\\s+", " ").replaceAll("-+", "-").toLowerCase();
-        System.out.println("consoleinput: " + consoleInput); //temporary for testing
+        //System.out.println("consoleinput: " + consoleInput); //temporary for testing
 
         String[] fullCommand = consoleInput.split("-");
         String firstCommand = fullCommand[0];
@@ -125,7 +127,7 @@ public class Game {
             commandArgument = Normalizer.normalize(commandArgument, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
             splitCommands.add(commandArgument);
         }
-        System.out.println(splitCommands);
+        //System.out.println(splitCommands);
         return splitCommands;
     }
 
@@ -140,14 +142,14 @@ public class Game {
             commandArgument = splitCommands.get(1);
         }
 
-        System.out.println(firstCommand + "\n" + commandArgument);
+        //System.out.println(firstCommand + "\n" + commandArgument);
 
         switch (firstCommand) {
             case "konec":
                 Command endCommand = new EndCommand(this.world);
                 commandReturn = endCommand.execute();
                 //temporary test to see world data after ending
-                System.out.println(world);
+                //System.out.println(world);
                 break;
 
             case "prikazy":
@@ -333,18 +335,19 @@ public class Game {
             //that is the reason why the statement has empty body
         }
 
-        System.out.println(world); //temporary test to see if world loaded properly
+        //System.out.println(world); //temporary test to see if world loaded properly
         //world.getCharacter("character_tunnelGuard").setMandatoryTalk(false); //temp
         //world.getCharacter("character_rudaGuard").setMandatoryTalk(false); //temp
         //world.getPlayer().getInventoryID().add("item_trashBag"); //temp
 
         while (!this.world.isEnd()) {
-            System.out.println("\nAktuální místnost: " + world.getCurrentRoom().getName() + "\n" + world.getCurrentRoom().getDescription());
+            System.out.println("\n=====================================================================================================================");
+            System.out.println("Aktuální místnost: " + world.getCurrentRoom().getName() + "\n" + world.getCurrentRoom().getDescription());
             System.out.println("Aktuální čas:" + world.getTime() % 24 + "(Celkem uběhlo hodin: " + world.getTime() + ")");
             System.out.println("Tvůj inventář: " + world.getPlayerInventoryNames());
             System.out.println("Vedlejší místnosti: " + world.getCurrentAdjacentRooms());
             System.out.println("Postavy v místnosti: " + world.getCurrentRoomCharacterNames());
-            System.out.println("Gamestate:" + world.getGameState()); //temp
+            //System.out.println("Gamestate:" + world.getGameState()); //temp
             System.out.print(world.currentFoundItemsToString());
             executeCommand(getPlayerCommand());
             updateGameState();
