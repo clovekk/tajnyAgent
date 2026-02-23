@@ -7,6 +7,10 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+/**
+ * This class serves as the container for the world data when creating a new world from resources
+ * @author Adam Dluhoš
+ */
 public class GameData {
     public Player player;
     public ArrayList<Room> rooms;
@@ -16,6 +20,11 @@ public class GameData {
     public ArrayList<String> futureTasks;
     public ArrayList<String> hints;
 
+    /**
+     * Loads a new world from the resource file
+     * @param resourcePath path to the resource file
+     * @return all the data the new world needs to be created
+     */
     public static GameData loadGameDataFromResources(String resourcePath) {
         Gson gson = new Gson();
 

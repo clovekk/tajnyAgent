@@ -3,6 +3,11 @@ package Commands;
 import game.*;
 
 //napoveda
+
+/**
+ * this command shows the hint
+ * @author Adam Dluhoš
+ */
 public class HintCommand implements Command {
     private World world;
 

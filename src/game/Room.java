@@ -2,6 +2,10 @@ package game;
 
 import java.util.ArrayList;
 
+/**
+ * This class serves as part of the map, the map consists of many Room class instances
+ * @author Adam Dluhoš
+ */
 public class Room {
     private String id;
     private String name;
@@ -75,6 +79,10 @@ public class Room {
         this.locked = locked;
     }
 
+    /**
+     * Connects two rooms together so they are adjacent to each other
+     * @param room the room to be connected to the instance of the Room class calling this method
+     */
     public void connectRooms(Room room) {
         this.adjacentRoomsID.add(room.getId());
         room.adjacentRoomsID.add(this.getId());

@@ -2,6 +2,10 @@ package game;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents all the game characters
+ * @author Adam Dluhoš
+ */
 public class Character {
     protected String id;
     protected String name;

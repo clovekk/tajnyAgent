@@ -3,6 +3,11 @@ package Commands;
 import game.*;
 
 //zahod
+
+/**
+ * this command throws away the item
+ * @author Adam Dluhoš
+ */
 public class ThrowAwayCommand implements Command {
     private World world;
     private String itemName;

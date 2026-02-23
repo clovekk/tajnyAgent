@@ -2,6 +2,10 @@ package game;
 
 import java.lang.Character;
 
+/**
+ * This class represents all the items in the game
+ * @author Adam Dluhoš
+ */
 public class Item {
     protected String id;
     protected String name;
@@ -57,6 +61,10 @@ public class Item {
         this.useText = useText;
     }
 
+    /**
+     * Determines the type of the item based on the ID (for example: itemID = "item_baseMap"; then the item type of that item is "Map")
+     * @return a String value of the item type (for example: Map or Gun)
+     */
     public String getItemType(){
         try {
             StringBuilder builderItemType = new StringBuilder();
@@ -64,7 +72,6 @@ public class Item {
             while (!Character.isUpperCase(this.id.charAt(i)) && Character.isLowerCase(this.id.charAt(i - 1))) {
                 builderItemType.insert(0, this.id.charAt(i));
                 i--;
-                System.out.println("cycle");
             }
             return builderItemType.toString();
         } catch (Exception e) {

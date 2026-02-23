@@ -3,6 +3,11 @@ package Commands;
 import game.*;
 
 //zakresli
+
+/**
+ * This command puts the current room into the map
+ * @author Adam Dluhoš
+ */
 public class MapOutCommand implements Command {
     private World world;
 

@@ -3,6 +3,11 @@ package Commands;
 import game.*;
 
 //proheldej
+
+/**
+ * this command searches the room
+ * @author Adam Dluhoš
+ */
 public class SearchCommand implements Command {
     private World world;
 

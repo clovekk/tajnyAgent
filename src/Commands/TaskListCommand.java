@@ -3,6 +3,11 @@ package Commands;
 import game.*;
 
 //ukoly
+
+/**
+ * this command shows all teh tasks
+ * @author Adam Dluhoš
+ */
 public class TaskListCommand implements Command {
     private World world;
 

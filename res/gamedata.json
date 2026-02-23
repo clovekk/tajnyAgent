@@ -35,7 +35,7 @@
   "player": {
     "id": "character_martinStaryAgentPlayer",
     "name": "Agent Martin Starý",
-    "dialogues": ["Počkej chvíli, musím jít.", "unassigned"],
+    "dialogues": ["Počkej chvíli, musím jít.", "unsp"],
     "inventoryID": ["item_baseMap"],
     "suspiciousness": 0
   },
@@ -49,31 +49,31 @@
     {
       "id": "character_mainDoorGuard",
       "name": "Hlídač hlavního vchodu",
-      "dialogues": ["Tak už jdi", "1", "unsp","unsp","unsp","unsp","unsp", "Co tu děláš?", "Chci ven.", "Jak je?", "To sotva.", "Dobře."],
+      "dialogues": ["Tak už jdi", "1", "unsp","unsp","unsp","unsp","unsp", "Co tu děláš?", "Chci ven.", "Jak je?", "Maximálně s odpadky.", "Dobře."],
       "mandatoryTalk": true
     },
     {
       "id": "character_rudaGuard",
       "name": "Hlídač Ruda",
-      "dialogues": ["Tak mě neruš.", "6", "unsp","unsp","unsp","unsp","unsp", "Hej ty pojď sem. Ztratil jsem knihu a nemám čas ji najít, najdeš ji prosím?", "Klidně.", "Na to nemám čas.", "Díky.", "Tak si trhni.","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp", "Co je?", "Tomáš venku potřebuje tvou pomoc.", "Tomáš je v nesnázích.", "Jdu tam!", "Hned tam budu!"],
+      "dialogues": ["Tak mě neruš.", "6", "unsp","unsp","unsp","unsp","unsp", "Hej ty pojď sem. Ztratil jsem knihu a nemám čas ji najít, najdeš ji prosím?", "Klidně.", "Na to nemám čas.", "Díky.", "Tak si trhni.","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp", "Co je?", "Tomáš venku potřebuje tvou pomoc.", "Tomáš je v nesnázích.", "Jdu tam!", "Hned tam budu!", "Co je?", "Jak se máš?", "Nic.", "Jde to.", "Tak neruš."],
       "mandatoryTalk": true
     },
     {
       "id": "character_tomasGuard",
       "name": "Hlídač Tomáš",
-      "dialogues": ["tg1", "2", "tg3"],
+      "dialogues": ["Tak mě nech.", "0", "Co chceš?", "Nemáš hlad?", "Jak to jde?", "Ne.", "Dobře, když mě zrovna nerušíš."],
       "mandatoryTalk": false
     },
     {
       "id": "character_pepaCook",
       "name": "Kuchař Pepa",
-      "dialogues": ["Tak neruš.", "5", "unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp", "Co po mně chceš?", "Chci jít na ulici.", "Nechceš s něčím pomoct?", "Nevim co bys tam dělal...", "Jasně, můžeš vynést odpadky."],
+      "dialogues": ["Tak neruš.", "5", "unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp","unsp", "Co po mně chceš?", "Chci jít na ulici.", "Nechceš s něčím pomoct?", "Nevim co bys tam dělal...", "Jasně, můžeš vynést odpadky.", "Co je?", "Nechceš s něčím pomoct?", "Jak je?", "Už jsi pomohl dost.", "Jde to."],
       "mandatoryTalk": false
     },
     {
       "id": "character_resistanceCommander",
       "name": "Velitel odboje",
-      "dialogues": ["rc1", "2", "rc3"],
+      "dialogues": ["Vzdej se!", "0", "Kdo si myslíš že jsi?", "Právě ty jsi nyní zatčen." , "Agent Martin Starý, tajná služba.", "Poplach, hlídači hned ke mně!" , "Nemožné, hlídači kde se flákáte?"],
       "mandatoryTalk": true
     }
   ],
@@ -108,7 +108,7 @@
     {
       "id": "room_street",
       "name": "Ulice",
-      "description": "Ulice před základnou odboje, vzdalovat se moc od vchodu by bylo přílišč podezřelé.",
+      "description": "Ulice před základnou odboje, vzdalovat se moc od vchodu by bylo příliš podezřelé.",
       "adjacentRoomsID": ["room_mainDoor"],
       "charactersID": [],
       "itemsID": [],

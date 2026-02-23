@@ -6,24 +6,25 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class serves as the main logic class of the game - it controls the game loop and the story of the game
+ * @author Adam Dluhoš
+ */
 public class Game {
     private World world;
     private ArrayList<String> commands;
     private String commandReturn;
-    private int startTime;
 
-    public Game(World world, ArrayList<String> commands, String commandReturn, int startTime) {
+    public Game(World world, ArrayList<String> commands, String commandReturn) {
         this.world = world;
         this.commands = commands;
         this.commandReturn = commandReturn;
-        this.startTime = startTime;
     }
 
     public Game() {
         this.world = new World();
         this.commands = new ArrayList<>();
         this.commandReturn = "";
-        this.startTime = 0;
     }
 
     public World getWorld() {
@@ -35,9 +36,6 @@ public class Game {
     public String getCommandReturn() {
         return commandReturn;
     }
-    public int getStartTime() {
-        return startTime;
-    }
 
     public void setWorld(World world) {
         this.world = world;
@@ -47,9 +45,6 @@ public class Game {
     }
     public void setCommandReturn(String commandReturn) {
         this.commandReturn = commandReturn;
-    }
-    public void setStartTime(int startTime) {
-        this.startTime = startTime;
     }
 
     /**
@@ -63,14 +58,17 @@ public class Game {
         String consoleInput = "";
         System.out.print("Chcete načíst uložený svět v souboru(C), nebo začít novou hru(N)?\n>>>");
         consoleInput = scn.nextLine();
+        WorldLoader wl;
 
         switch (consoleInput.toUpperCase()) {
             case "C":
                 //TODO write a method that loads a saved game
+                wl = new WorldLoader();
+                world = wl.loadSavedWorld("saves/savedGame.json");
                 return true;
 
             case "N":
-                WorldLoader wl = new WorldLoader();
+                wl = new WorldLoader();
                 world = wl.loadNewWorld("/gamedata.json");
                 return true;
 
@@ -230,6 +228,7 @@ public class Game {
         if (gameState == 0 && !world.getCharacter("character_tunnelGuard").isMandatoryTalk()) {
             world.setGameState(1);
             world.moveCharacter("character_rudaGuard", "room_hall");
+            world.getCharacter("character_rudaGuard").setMandatoryTalk(true);
             return;
         }
         if (gameState == 1 && !world.getCharacter("character_rudaGuard").isMandatoryTalk()) {
@@ -238,7 +237,7 @@ public class Game {
                 world.moveCharacter("character_rudaGuard", "room_checkpoint");
                 world.getCurrentTasks().add("Najdi Rudovu knihu");
                 world.getFutureTasks().remove("Najdi Rudovu knihu");
-                this.setStartTime(world.getTime());
+                world.setStartTime(world.getTime());
                 world.getRoom("room_bathroom").getItemsID().add("item_rudaBook");
                 return;
             }
@@ -249,7 +248,7 @@ public class Game {
             return;
         }
         if (commandReturn.equals("3")) {
-            if (world.getTime() > this.startTime + 24) {
+            if (world.getTime() > world.getStartTime() + 24) {
                 world.getPlayer().setSuspiciousness(1);
             }
             world.setGameState(3);
@@ -257,10 +256,10 @@ public class Game {
             world.getRoom("room_kitchen").getItemsID().add("item_trashBag");
             return;
         }
-        if (gameState == 3 && commandReturn.equals("1")) {
+        if (gameState == 3 && commandReturn.equals("11")) {
             world.getItem("item_trashBag").setState(2);
         }
-        if (gameState == 3 && commandReturn.equals("0")) {
+        if (gameState == 3 && commandReturn.equals("10")) {
             world.getPlayer().setSuspiciousness(world.getPlayer().getSuspiciousness() + 1);
         }
         if (world.getPlayer().getSuspiciousness() >= 2) {
@@ -285,7 +284,7 @@ public class Game {
         if (commandReturn.equals("5")) {
             world.setGameState(4);
         }
-        if (commandReturn.equals("6") && world.getGameState() == 4) {
+        if (commandReturn.equals("8") && world.getGameState() == 4) {
             System.out.println("Když jsi spal na chvíli tě vzbudil zvuk houkaček projíždějících okolo, myslel sis že to je náhoda, ale když se to po hodině zopakovalo věděl jsi že ne.");
             world.moveCharacter("character_tomasGuard", "room_street");
         }
@@ -296,7 +295,7 @@ public class Game {
             world.setGameState(6);
         }
         if (commandReturn.equals("6")) {
-            world.getRoom("room_storage").getItemsID().add("item_pistolGun");
+
         }
         if (commandReturn.equals("7")) {
             world.getCurrentRoom().getCharactersID().remove("character_rudaGuard");
@@ -308,6 +307,14 @@ public class Game {
         }
         if (world.getCurrentRoom().getId().equals("room_commanderRoom")) {
             System.out.println("Úspěšně jsi zatkl velitele odboje a přivolal na základnu razii, agent Martin Starý byl prezidentem vyznamenán a navždy bude považován za hrdinu!");
+            world.setGameState(7);
+            ArrayList<String> newEndCommand = new ArrayList<>();
+            newEndCommand.add("konec");
+            executeCommand(newEndCommand);
+        }
+        if (gameState == 7) {
+            System.out.println("Úspěšně jsi zatkl velitele odboje a přivolal na základnu razii, agent Martin Starý byl prezidentem vyznamenán a navždy bude považován za hrdinu!");
+            world.setGameState(7);
             ArrayList<String> newEndCommand = new ArrayList<>();
             newEndCommand.add("konec");
             executeCommand(newEndCommand);
@@ -334,8 +341,10 @@ public class Game {
         while (!this.world.isEnd()) {
             System.out.println("\nAktuální místnost: " + world.getCurrentRoom().getName() + "\n" + world.getCurrentRoom().getDescription());
             System.out.println("Aktuální čas:" + world.getTime() % 24 + "(Celkem uběhlo hodin: " + world.getTime() + ")");
+            System.out.println("Tvůj inventář: " + world.getPlayerInventoryNames());
             System.out.println("Vedlejší místnosti: " + world.getCurrentAdjacentRooms());
             System.out.println("Postavy v místnosti: " + world.getCurrentRoomCharacterNames());
+            System.out.println("Gamestate:" + world.getGameState()); //temp
             System.out.print(world.currentFoundItemsToString());
             executeCommand(getPlayerCommand());
             updateGameState();

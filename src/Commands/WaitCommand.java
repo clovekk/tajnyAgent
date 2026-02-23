@@ -3,6 +3,11 @@ package Commands;
 import game.*;
 
 //cekej
+
+/**
+ * this command skips time by waiting
+ * @author Adam Dluhoš
+ */
 public class WaitCommand implements Command {
     private World world;
 

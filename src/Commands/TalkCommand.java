@@ -7,6 +7,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //mluv
+
+/**
+ * this command talks to npcs
+ * @author Adam Dluhoš
+ */
 public class TalkCommand implements Command {
     private World world;
     private String characterName;
@@ -23,6 +28,7 @@ public class TalkCommand implements Command {
                 Character character = world.getCharacterByCompatibleName(characterName);
                 Player player = world.getPlayer();
                 Scanner scn = new Scanner(System.in);
+                int commandReturnBase = 0;
                 int dialogueCoefficient = getDialogueCoefficient(character);
                 //System.out.println("pre: " + dialogueCoefficient);
                 if (character.getDialogues().get(dialogueCoefficient * 5 + 2).equals("unsp")) {
@@ -33,6 +39,7 @@ public class TalkCommand implements Command {
                 if (world.getGameState() == 2 && character.getId().equals("character_rudaGuard") && world.getPlayer().getInventoryID().contains("item_rudaBook")) {
                     System.out.println(character.getName() + ": Díky že jsi tu knihu našel.");
                     System.out.println(player.getName() + ": Není zač.");
+                    world.getPlayer().getInventoryID().remove("item_rudaBook");
                     return "3";
                 }
 
@@ -47,6 +54,9 @@ public class TalkCommand implements Command {
                     return "6";
                 }
 
+                if (world.getGameState() == 3 && character.getId().equals("character_pepaCook")) {
+                    commandReturnBase = 10;
+                }
                 //character dialogues list format: (0) = end current dialogue text, (1) = gameState value of last unique dialogue, (2 + 5 * gameState) initial character response, (3 + 5 * gameState) first player dialogue option,
                 // (4 + 5 * gameState) second player dialogue option, (5 + 5 * gameState) first character response option, (6 + 5 * gameState) second character response option
                 //the gameState value the dialog used by the character when they no longer have an important role in the story and have no unique dialogues
@@ -68,6 +78,7 @@ public class TalkCommand implements Command {
                     chosenOption = scn.nextInt() - 1;
                 } catch (InputMismatchException e) {
                     System.out.println("Toto není číslo");
+                    return "";
                 }
                 while (chosenOption < 0 || chosenOption > 2) {
                     System.out.println("Neplatné číslo odpovědi");
@@ -93,7 +104,7 @@ public class TalkCommand implements Command {
                 System.out.println(character.getName() + ": " + character.getDialogues().get(5 + chosenOption + dialogueCoefficient * 5));
                 character.setMandatoryTalk(false);
                 world.setTime(world.getTime() + 1);
-                return String.valueOf(chosenOption);
+                return String.valueOf(chosenOption + commandReturnBase);
             } else {
                 System.out.println("Postava se jménem " + characterName + " v místnosti není");
             }

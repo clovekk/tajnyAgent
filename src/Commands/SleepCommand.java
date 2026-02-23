@@ -3,6 +3,11 @@ package Commands;
 import game.*;
 
 //spi
+
+/**
+ * this command skips time by sleeping
+ * @author Adam Dluhoš
+ */
 public class SleepCommand implements Command {
     private World world;
 
@@ -25,6 +30,6 @@ public class SleepCommand implements Command {
         } else {
             System.out.println("Nejsi v místnosti kde by byla volná postel");
         }
-        return "6";
+        return "8";
     }
 }

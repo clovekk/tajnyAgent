@@ -2,6 +2,10 @@ package game;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the special MapItem with the ID item_baseMap
+ * @author Adam Dluhoš
+ */
 public class MapItem extends Item{
     private ArrayList<String> mappedRoomsID;
 

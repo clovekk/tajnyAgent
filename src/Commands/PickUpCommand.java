@@ -3,6 +3,11 @@ package Commands;
 import game.*;
 
 //seber
+
+/**
+ * this command pick up an item
+ * @author Adam Dluhoš
+ */
 public class PickUpCommand implements Command {
     private World world;
     private String itemName;
@@ -30,7 +35,7 @@ public class PickUpCommand implements Command {
                     System.out.println("Předmět " + itemName + " v místnosti nevidíš");
                 }
             } else {
-                System.out.println("Předmět " + itemName + " v místnosti nevidíš");
+                System.out.println("Předmět " + itemName + " se v místnosti nenachází");
             }
         }
         return "";

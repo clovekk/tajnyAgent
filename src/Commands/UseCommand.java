@@ -3,6 +3,11 @@ package Commands;
 import game.*;
 
 //pouzij
+
+/**
+ * This command uses item
+ * @author Adam Dluhoš
+ */
 public class UseCommand implements Command {
     private World world;
     private String itemName;

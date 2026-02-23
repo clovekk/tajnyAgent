@@ -6,6 +6,10 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class serves as the main game world and contains all the game data
+ * @author Adam Dluhoš
+ */
 public class World {
     private Room currentRoom;
     private ArrayList<String> currentTasks;
@@ -14,12 +18,13 @@ public class World {
     private ArrayList<Character> characters;
     private ArrayList<Room> rooms;
     private int time;
+    private int startTime;
     private int gameState;
     private Player player;
     private ArrayList<String> hints;
     private boolean end;
 
-    public World(Room currentRoom, ArrayList<String> currentTasks, ArrayList<String> futureTasks, ArrayList<Item> items, ArrayList<Character> characters, ArrayList<Room> rooms, int time, int gameState, Player player, ArrayList<String> hints, HashMap<String, Command> commands, boolean end) {
+    public World(Room currentRoom, ArrayList<String> currentTasks, ArrayList<String> futureTasks, ArrayList<Item> items, ArrayList<Character> characters, ArrayList<Room> rooms, int time, int startTime, int gameState, Player player, ArrayList<String> hints, HashMap<String, Command> commands, boolean end) {
         this.currentRoom = currentRoom;
         this.currentTasks = currentTasks;
         this.futureTasks = futureTasks;
@@ -27,6 +32,7 @@ public class World {
         this.characters = characters;
         this.rooms = rooms;
         this.time = time;
+        this.startTime = startTime;
         this.gameState = gameState;
         this.player = player;
         this.hints = hints;
@@ -41,6 +47,7 @@ public class World {
         this.characters = new ArrayList<>();
         this.rooms = new ArrayList<>();
         this.time = 0;
+        this.startTime = 0;
         this.gameState = 0;
         this.player = new Player();
         this.hints = new ArrayList<>();
@@ -58,6 +65,9 @@ public class World {
     }
     public int getTime() {
         return time;
+    }
+    public int getStartTime() {
+        return startTime;
     }
     public Player getPlayer() {
         return player;
@@ -92,6 +102,9 @@ public class World {
     }
     public void setTime(int time) {
         this.time = time;
+    }
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
     }
     public void setPlayer(Player player) {
         this.player = player;
@@ -158,8 +171,7 @@ public class World {
     }
 
     //old methods that can only find the element by its precise name, replaced with the get____ByCompatibleName() methods
-    /*
-    public Item getItemByName(String itemName) {
+    /*public Item getItemByName(String itemName) {
         for (Item item : this.items) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 return item;
@@ -184,8 +196,7 @@ public class World {
             }
         }
         return null;
-    }
-    */
+    }*/
 
     /**
      * Finds all the items in the currentRoom and puts them into an ArrayList
@@ -244,8 +255,8 @@ public class World {
      */
     public boolean hasMandatoryTalk(Room room) {
         boolean hasMandatoryTalk = false;
-        for (int i = 0; i < room.getCharactersID().size() - 1; i++) {
-            if (!room.getCharactersID().get(i).equals("character_martinStaryAgentPlayer") && this.getCharacter(room.getCharactersID().get(i)).isMandatoryTalk()) {
+        for (int i = 0; i < this.getCurrentRoom().getCharactersID().size() - 1; i++) {
+            if (!this.getCurrentRoom().getCharactersID().get(i).equals("character_martinStaryAgentPlayer") && this.getCharacter(this.getCurrentRoom().getCharactersID().get(i)).isMandatoryTalk()) {
                 hasMandatoryTalk = true;
             }
         }
@@ -257,10 +268,10 @@ public class World {
      * @return an ArrayList of all the items with state == 2 in the current rooms
      */
     public ArrayList<Item> getCurrentRoomFoundItems() {
-        ArrayList<Item> currentFoundItems = this.getCurrentRoomItems();
-        for (int i = 0; i < currentFoundItems.size(); i++) {
-            if (currentFoundItems.get(i).getState() != 2) {
-                currentFoundItems.remove((int)i);
+        ArrayList<Item> currentFoundItems = new ArrayList<>();
+        for (int i = 0; i < this.getCurrentRoomItems().size(); i++) {
+            if (this.getCurrentRoomItems().get(i).getState() == 2) {
+                currentFoundItems.add(this.getCurrentRoomItems().get(i));
             }
         }
         return currentFoundItems;
@@ -399,10 +410,10 @@ public class World {
      * @param roomID the ID of the chosen room to move to
      */
     public void moveCharacter(String characterID, String roomID) {
-        if (this.getCharacters().contains(getCharacter(characterID)) && this.getRooms().contains(getRoom(roomID))) {
-            Character character = getCharacter(characterID);
-            Room room = getRoom(roomID);
-            findRoomWithCharacter(characterID).getCharactersID().remove(characterID);
+        if (this.getCharacters().contains(this.getCharacter(characterID)) && this.getRooms().contains(this.getRoom(roomID))) {
+            Character character = this.getCharacter(characterID);
+            Room room = this.getRoom(roomID);
+            this.findRoomWithCharacter(characterID).getCharactersID().remove(characterID);
             room.getCharactersID().add(characterID);
         }
     }
@@ -431,9 +442,16 @@ public class World {
         return roomsID;
     }
 
-    //unused
-    public Command readCommand(String command) {
-        return null;
+    /**
+     * Returns the names of all the item in players inventory
+     * @return an ArrayList of all the item names of the items in players inventory
+     */
+    public ArrayList<String> getPlayerInventoryNames() {
+        ArrayList<String> itemNames = new ArrayList<>();
+        for (int i = 0; i < this.player.getInventoryID().size(); i++) {
+            itemNames.add(this.getItem(this.player.getInventoryID().get(i)).getName());
+        }
+        return itemNames;
     }
 
     @Override
