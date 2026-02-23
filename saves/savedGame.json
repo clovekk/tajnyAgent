@@ -1,35 +1,38 @@
 {
   "currentRoom": {
-    "id": "room_commanderRoom",
-    "name": "Pokoj velitele",
-    "description": "Pokoj z kterého velitel řídí odboj a z bezpečnostních důvodů v něm tráví většinu svého času. Má zde svou vlastní koupelnu, postel a také pracovnu, stanici s vysílačkami a skříňku na zbraně. Obyčejným odbojářům je sem vstup zakázán,smí sem pouze osobní ochranka velitele.",
+    "id": "room_tunnel",
+    "name": "Tajný tunel",
+    "description": "Výchozí místo - tajný podzemní tunel vedoucí z kanalizace do základny odboje. Na jeho konci hlídá jeden hlídač.",
     "adjacentRoomsID": [
-      "room_checkpoint"
+      "room_hall"
     ],
     "charactersID": [
-      "character_resistanceCommander",
+      "character_tunnelGuard",
       "character_martinStaryAgentPlayer"
     ],
     "itemsID": [],
     "locked": false
   },
-  "currentTasks": [
-    "Najdi Rudovu knihu",
-    "Dostaň mapu k tajné službě",
-    "Dostaň mapu k tajné službě",
-    "Dostaň mapu k tajné službě",
-    "Dostaň mapu k tajné službě"
-  ],
+  "currentTasks": [],
   "futureTasks": [
-    "Zmapuj základnu"
+    "Zmapuj základnu",
+    "Najdi Rudovu knihu",
+    "Dostaň mapu k tajné službě"
   ],
   "items": [
     {
       "id": "item_rudaBook",
       "name": "Kniha",
       "deletable": true,
-      "state": 2,
+      "state": 1,
       "useText": "rb"
+    },
+    {
+      "id": "item_trashBag",
+      "name": "Pytel odpadků",
+      "deletable": false,
+      "state": 1,
+      "useText": "tb"
     },
     {
       "id": "item_pistolGun",
@@ -57,7 +60,7 @@
         "V pohodě.",
         "Ne."
       ],
-      "mandatoryTalk": false
+      "mandatoryTalk": true
     },
     {
       "id": "character_mainDoorGuard",
@@ -120,7 +123,7 @@
         "Jde to.",
         "Tak neruš."
       ],
-      "mandatoryTalk": false
+      "mandatoryTalk": true
     },
     {
       "id": "character_tomasGuard",
@@ -194,7 +197,8 @@
         "room_hall"
       ],
       "charactersID": [
-        "character_tunnelGuard"
+        "character_tunnelGuard",
+        "character_martinStaryAgentPlayer"
       ],
       "itemsID": [],
       "locked": false
@@ -212,10 +216,7 @@
         "room_kitchen",
         "room_checkpoint"
       ],
-      "charactersID": [
-        "character_martinStaryAgentPlayer",
-        "character_martinStaryAgentPlayer"
-      ],
+      "charactersID": [],
       "itemsID": [],
       "locked": false
     },
@@ -240,9 +241,7 @@
       "adjacentRoomsID": [
         "room_mainDoor"
       ],
-      "charactersID": [
-        "character_tomasGuard"
-      ],
+      "charactersID": [],
       "itemsID": [],
       "locked": false
     },
@@ -253,9 +252,7 @@
       "adjacentRoomsID": [
         "room_hall"
       ],
-      "charactersID": [
-        "character_martinStaryAgentPlayer"
-      ],
+      "charactersID": [],
       "itemsID": [],
       "locked": false
     },
@@ -306,7 +303,7 @@
       ],
       "charactersID": [
         "character_rudaGuard",
-        "character_martinStaryAgentPlayer"
+        "character_tomasGuard"
       ],
       "itemsID": [],
       "locked": false
@@ -319,18 +316,19 @@
         "room_checkpoint"
       ],
       "charactersID": [
-        "character_resistanceCommander",
-        "character_martinStaryAgentPlayer"
+        "character_resistanceCommander"
       ],
       "itemsID": [],
-      "locked": false
+      "locked": true
     }
   ],
-  "time": 56,
-  "startTime": 7,
-  "gameState": 7,
+  "time": 0,
+  "startTime": 0,
+  "gameState": 0,
   "player": {
-    "inventoryID": [],
+    "inventoryID": [
+      "item_baseMap"
+    ],
     "suspiciousness": 0,
     "id": "character_martinStaryAgentPlayer",
     "name": "Agent Martin Starý",
@@ -348,22 +346,11 @@
   "end": false,
   "mapItems": [
     {
-      "mappedRoomsID": [
-        "room_commanderRoom",
-        "room_tunnel",
-        "room_hall",
-        "room_bathroom",
-        "room_checkpoint",
-        "room_kitchen",
-        "room_mainDoor",
-        "room_street",
-        "room_storage",
-        "room_beds"
-      ],
+      "mappedRoomsID": [],
       "id": "item_baseMap",
       "name": "Mapa základny",
       "deletable": false,
-      "state": 4,
+      "state": 1,
       "useText": "bm"
     }
   ]

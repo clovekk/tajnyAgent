@@ -21,6 +21,5 @@ public class EndCommand implements Command {
         wl.saveLoadedWorld("saves/savedGame.json", this.world);
         this.world.setEnd(true);
         return "";
-        //TODO dodelat ukladani hry pred ukoncenim programu
     }
 }
