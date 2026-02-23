@@ -1,0 +1,370 @@
+{
+  "currentRoom": {
+    "id": "room_commanderRoom",
+    "name": "Pokoj velitele",
+    "description": "Pokoj z kterého velitel řídí odboj a z bezpečnostních důvodů v něm tráví většinu svého času. Má zde svou vlastní koupelnu, postel a také pracovnu, stanici s vysílačkami a skříňku na zbraně. Obyčejným odbojářům je sem vstup zakázán,smí sem pouze osobní ochranka velitele.",
+    "adjacentRoomsID": [
+      "room_checkpoint"
+    ],
+    "charactersID": [
+      "character_resistanceCommander",
+      "character_martinStaryAgentPlayer"
+    ],
+    "itemsID": [],
+    "locked": false
+  },
+  "currentTasks": [
+    "Najdi Rudovu knihu",
+    "Dostaň mapu k tajné službě",
+    "Dostaň mapu k tajné službě",
+    "Dostaň mapu k tajné službě",
+    "Dostaň mapu k tajné službě"
+  ],
+  "futureTasks": [
+    "Zmapuj základnu"
+  ],
+  "items": [
+    {
+      "id": "item_rudaBook",
+      "name": "Kniha",
+      "deletable": true,
+      "state": 2,
+      "useText": "rb"
+    },
+    {
+      "id": "item_pistolGun",
+      "name": "Pistole",
+      "deletable": false,
+      "state": 1,
+      "useText": "pg"
+    }
+  ],
+  "characters": [
+    {
+      "id": "character_tunnelGuard",
+      "name": "Hlídač tunelu",
+      "dialogues": [
+        "Tak tu nečum.",
+        "1",
+        "Kdo jsi?",
+        "Pusť mě dál, snad vidíš mou kartu ne?",
+        "Je to napsaný na mý kartě...",
+        "V klidu chlape, jasně, můžeš jít.",
+        "V pořádku, můžeš dál.",
+        "Co chceš?",
+        "Jak je?",
+        "Nechceš pomoct?",
+        "V pohodě.",
+        "Ne."
+      ],
+      "mandatoryTalk": false
+    },
+    {
+      "id": "character_mainDoorGuard",
+      "name": "Hlídač hlavního vchodu",
+      "dialogues": [
+        "Tak už jdi",
+        "1",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "Co tu děláš?",
+        "Chci ven.",
+        "Jak je?",
+        "Maximálně s odpadky.",
+        "Dobře."
+      ],
+      "mandatoryTalk": true
+    },
+    {
+      "id": "character_rudaGuard",
+      "name": "Hlídač Ruda",
+      "dialogues": [
+        "Tak mě neruš.",
+        "6",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "Hej ty pojď sem. Ztratil jsem knihu a nemám čas ji najít, najdeš ji prosím?",
+        "Klidně.",
+        "Na to nemám čas.",
+        "Díky.",
+        "Tak si trhni.",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "Co je?",
+        "Tomáš venku potřebuje tvou pomoc.",
+        "Tomáš je v nesnázích.",
+        "Jdu tam!",
+        "Hned tam budu!",
+        "Co je?",
+        "Jak se máš?",
+        "Nic.",
+        "Jde to.",
+        "Tak neruš."
+      ],
+      "mandatoryTalk": false
+    },
+    {
+      "id": "character_tomasGuard",
+      "name": "Hlídač Tomáš",
+      "dialogues": [
+        "Tak mě nech.",
+        "0",
+        "Co chceš?",
+        "Nemáš hlad?",
+        "Jak to jde?",
+        "Ne.",
+        "Dobře, když mě zrovna nerušíš."
+      ],
+      "mandatoryTalk": false
+    },
+    {
+      "id": "character_pepaCook",
+      "name": "Kuchař Pepa",
+      "dialogues": [
+        "Tak neruš.",
+        "5",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "unsp",
+        "Co po mně chceš?",
+        "Chci jít na ulici.",
+        "Nechceš s něčím pomoct?",
+        "Nevim co bys tam dělal...",
+        "Jasně, můžeš vynést odpadky.",
+        "Co je?",
+        "Nechceš s něčím pomoct?",
+        "Jak je?",
+        "Už jsi pomohl dost.",
+        "Jde to."
+      ],
+      "mandatoryTalk": false
+    },
+    {
+      "id": "character_resistanceCommander",
+      "name": "Velitel odboje",
+      "dialogues": [
+        "Vzdej se!",
+        "0",
+        "Kdo si myslíš že jsi?",
+        "Právě ty jsi nyní zatčen.",
+        "Agent Martin Starý, tajná služba.",
+        "Poplach, hlídači hned ke mně!",
+        "Nemožné, hlídači kde se flákáte?"
+      ],
+      "mandatoryTalk": true
+    }
+  ],
+  "rooms": [
+    {
+      "id": "room_tunnel",
+      "name": "Tajný tunel",
+      "description": "Výchozí místo - tajný podzemní tunel vedoucí z kanalizace do základny odboje. Na jeho konci hlídá jeden hlídač.",
+      "adjacentRoomsID": [
+        "room_hall"
+      ],
+      "charactersID": [
+        "character_tunnelGuard"
+      ],
+      "itemsID": [],
+      "locked": false
+    },
+    {
+      "id": "room_hall",
+      "name": "Chodba",
+      "description": "Hlavní chodba základny, propojující všechny místnosti, až na místnost velitele.",
+      "adjacentRoomsID": [
+        "room_tunnel",
+        "room_mainDoor",
+        "room_beds",
+        "room_bathroom",
+        "room_storage",
+        "room_kitchen",
+        "room_checkpoint"
+      ],
+      "charactersID": [
+        "character_martinStaryAgentPlayer",
+        "character_martinStaryAgentPlayer"
+      ],
+      "itemsID": [],
+      "locked": false
+    },
+    {
+      "id": "room_mainDoor",
+      "name": "Hlavní vchod",
+      "description": "Vchodová místnost do budovy, hlídaná jedním hlídačem.",
+      "adjacentRoomsID": [
+        "room_hall",
+        "room_street"
+      ],
+      "charactersID": [
+        "character_mainDoorGuard"
+      ],
+      "itemsID": [],
+      "locked": false
+    },
+    {
+      "id": "room_street",
+      "name": "Ulice",
+      "description": "Ulice před základnou odboje, vzdalovat se moc od vchodu by bylo příliš podezřelé.",
+      "adjacentRoomsID": [
+        "room_mainDoor"
+      ],
+      "charactersID": [
+        "character_tomasGuard"
+      ],
+      "itemsID": [],
+      "locked": false
+    },
+    {
+      "id": "room_beds",
+      "name": "Postele",
+      "description": "Místnost s postelema, kam chodí odbojáři spát a trávit volný čas.",
+      "adjacentRoomsID": [
+        "room_hall"
+      ],
+      "charactersID": [
+        "character_martinStaryAgentPlayer"
+      ],
+      "itemsID": [],
+      "locked": false
+    },
+    {
+      "id": "room_bathroom",
+      "name": "Koupelna",
+      "description": "Místnost s kabinkami se záchody, umyvadly a sprchami.",
+      "adjacentRoomsID": [
+        "room_hall"
+      ],
+      "charactersID": [],
+      "itemsID": [],
+      "locked": false
+    },
+    {
+      "id": "room_storage",
+      "name": "Sklad",
+      "description": "Místnost kde se skladují zásoby celé základny a zárověň také zbraně.",
+      "adjacentRoomsID": [
+        "room_hall"
+      ],
+      "charactersID": [],
+      "itemsID": [
+        "item_pistolGun"
+      ],
+      "locked": false
+    },
+    {
+      "id": "room_kitchen",
+      "name": "Kuchyně",
+      "description": "Místnost, kde se nachází kuchyně, kde kuchař vaří jídlo pro základnu, a také jídelna, kam chodí odbojáři jíst.",
+      "adjacentRoomsID": [
+        "room_hall"
+      ],
+      "charactersID": [
+        "character_pepaCook"
+      ],
+      "itemsID": [],
+      "locked": false
+    },
+    {
+      "id": "room_checkpoint",
+      "name": "Místnost s hlídači",
+      "description": "Zdí oddělená část chodby, kde za normálních okolností hlídají dva hlídači, kteří jsou členi osobní ochranky velitele, vchod do pokoje velitele odboje.",
+      "adjacentRoomsID": [
+        "room_hall",
+        "room_commanderRoom"
+      ],
+      "charactersID": [
+        "character_rudaGuard",
+        "character_martinStaryAgentPlayer"
+      ],
+      "itemsID": [],
+      "locked": false
+    },
+    {
+      "id": "room_commanderRoom",
+      "name": "Pokoj velitele",
+      "description": "Pokoj z kterého velitel řídí odboj a z bezpečnostních důvodů v něm tráví většinu svého času. Má zde svou vlastní koupelnu, postel a také pracovnu, stanici s vysílačkami a skříňku na zbraně. Obyčejným odbojářům je sem vstup zakázán,smí sem pouze osobní ochranka velitele.",
+      "adjacentRoomsID": [
+        "room_checkpoint"
+      ],
+      "charactersID": [
+        "character_resistanceCommander",
+        "character_martinStaryAgentPlayer"
+      ],
+      "itemsID": [],
+      "locked": false
+    }
+  ],
+  "time": 56,
+  "startTime": 7,
+  "gameState": 7,
+  "player": {
+    "inventoryID": [],
+    "suspiciousness": 0,
+    "id": "character_martinStaryAgentPlayer",
+    "name": "Agent Martin Starý",
+    "dialogues": [
+      "Počkej chvíli, musím jít.",
+      "unsp"
+    ],
+    "mandatoryTalk": false
+  },
+  "hints": [
+    "h1",
+    "h2",
+    "h3"
+  ],
+  "end": false,
+  "mapItems": [
+    {
+      "mappedRoomsID": [
+        "room_commanderRoom",
+        "room_tunnel",
+        "room_hall",
+        "room_bathroom",
+        "room_checkpoint",
+        "room_kitchen",
+        "room_mainDoor",
+        "room_street",
+        "room_storage",
+        "room_beds"
+      ],
+      "id": "item_baseMap",
+      "name": "Mapa základny",
+      "deletable": false,
+      "state": 4,
+      "useText": "bm"
+    }
+  ]
+}
