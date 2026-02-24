@@ -24,7 +24,7 @@ public class MoveCommand implements Command {
         } else {
             Room newRoom = world.getRoomByCompatibleName(newRoomName);
             if (world.getCurrentRoom().getAdjacentRoomsID().contains(newRoom.getId())) {
-                if (!world.getCurrentRoom().getCharactersID().isEmpty() && world.hasMandatoryTalk(world.getCurrentRoom()) && !(newRoom.getId().equals("room_hall")) && world.getCurrentRoom().getCharactersID().contains("character_mainDoorGuard")) {
+                if (!world.getCurrentRoom().getCharactersID().isEmpty() && world.hasMandatoryTalk(world.getCurrentRoom()) && !(newRoom.getId().equals("room_hall") && world.getCurrentRoom().getCharactersID().contains("character_mainDoorGuard"))) {
                     System.out.println("Vypadá to že by si s tebou chtěl " + world.getCharacter(world.getCurrentRoom().getCharactersID().getFirst()).getName() + " promluvit než tě nechá odejít");
                 } else {
                     if (newRoom.isLocked()) {

@@ -5,7 +5,7 @@
       "name": "Mapa základny",
       "deletable": false,
       "state": 1,
-      "useText": "bm",
+      "useText": "Prohlédl sis mapu",
       "mappedRoomsID": []
     }
   ],
@@ -15,21 +15,21 @@
       "name": "Kniha",
       "deletable": true,
       "state": 1,
-      "useText": "rb"
+      "useText": "Prohlédl sis knihu"
     },
     {
       "id": "item_trashBag",
       "name": "Pytel odpadků",
       "deletable": false,
       "state": 1,
-      "useText": "tb"
+      "useText": "Prohlédl sis pytel odpadků"
     },
     {
       "id": "item_pistolGun",
       "name": "Pistole",
       "deletable": false,
       "state": 1,
-      "useText": "pg"
+      "useText": "Radši ses rozhodl jen tak nestřílet."
     }
   ],
   "player": {

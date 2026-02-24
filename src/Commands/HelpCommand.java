@@ -32,6 +32,7 @@ public class HelpCommand implements Command {
                 pouzij-<jmeno predmetu>  | použije daný předmět pokud to je možné
                 cekej                    | hráč počká 6 hodin
                 """;
+        System.out.println(commands);
         return "";
     }
 }
