@@ -1,11 +1,11 @@
-# Popis hry
+# :information_source: Popis hry
 Jedná se o jednoduchou a krátkou textovou hru s příběhem jednoduchým na pochopení.
 Hráč hraje za Agenta Martina Starého, což je člen státní tajné služby, 
 právě se nachází před vchodem do tajného podzemního tunelu využívaného protistátním odbojem 
 a má za úkol v přestrojení proniknout do jádra základny odboje a zatknout jejího velitele.
 Aby se mu toto povedlo bude muset splnit několik jednoduchých úkolů, aniž by vzbudil příliš velké podezření.
 
-# Příkazy
+# :joystick: Příkazy
 | Příkaz                     | Využití                                    |
 | -------------------------- | ------------------------------------------ |
 | konec                      | ukončí a uloží hru                         |
@@ -22,7 +22,7 @@ Aby se mu toto povedlo bude muset splnit několik jednoduchých úkolů, aniž b
 | pouzij-\<jmeno predmetu\>  | použije daný předmět pokud to je možné     |
 | cekej                      | hráč počká 6 hodin                         |
 
-# Důležité informace
+# :warning: Důležité informace
 Při spouštěni hry pomocí příkazového řádku je nutné aby jste pokaždé jar soubor spouštěli ze složky ve které se nachází.
 Důvod to má takový, že při ukládání hry se složka s uloženou hrou vytvoří ve složce ze které je příkazový řádek spuštěn a ne ve složce kde se nachází samotný jar soubor.
 Na vhodné spuštění hry se tedy před jejím spuštěním ujistěte, že jste v příkazovém řádku pomocí příkazu cd nastavili složku jar souboru hry.
