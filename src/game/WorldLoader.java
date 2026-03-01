@@ -1,7 +1,9 @@
 package game;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
@@ -75,6 +77,11 @@ public class WorldLoader {
      */
     public void saveLoadedWorld(String resourcePath, World world) {
         SavedGameData data = new SavedGameData();
+        Path folderPath = Path.of("saves");
+
+        if (!Files.exists(folderPath)) {
+            new File("saves").mkdirs();
+        }
 
         for (int i = 0; i < world.getItems().size(); i++) {
             if (!world.getItems().get(i).getId().equals("item_baseMap")) {
