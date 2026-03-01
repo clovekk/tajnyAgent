@@ -1,5 +1,7 @@
 package game;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
@@ -45,7 +47,7 @@ public class WorldLoader {
      * @param resourcePath path to the save file
      * @return an instance of the World class with all the data loaded
      */
-    public World loadSavedWorld(String resourcePath) {
+    public World loadSavedWorld(String resourcePath) throws IOException {
         World world = new World();
         SavedGameData data = SavedGameData.loadGameData(Path.of(resourcePath));
 

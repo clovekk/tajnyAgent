@@ -2,6 +2,8 @@ package game;
 
 import Commands.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -63,7 +65,12 @@ public class Game {
         switch (consoleInput.toUpperCase()) {
             case "C":
                 wl = new WorldLoader();
-                world = wl.loadSavedWorld("saves/savedGame.json");
+                try {
+                    world = wl.loadSavedWorld("saves/savedGame.json");
+                } catch (IOException e) {
+                    System.out.println("Není uložený žádný svět");
+                    return false;
+                }
                 return true;
 
             case "N":
@@ -71,7 +78,7 @@ public class Game {
                 world = wl.loadNewWorld("/gamedata.json");
                 System.out.println("Člen státní tajné služby, agent Martin Starý, se nachází před vchodem do tajného\n" +
                         "podzemního tunelu využívaného protistátním odbojem a má za úkol\n" +
-                        "v přestrojení proniknout do jádra základny odboje");
+                        "v přestrojení proniknout do jádra základny odboje a zatknout hlavního velitele odboje.");
                 return true;
 
             default:
@@ -224,6 +231,7 @@ public class Game {
     public void updateGameState() {
         int gameState = world.getGameState();
         if (gameState == 0 && !world.getCurrentTasks().contains("Zmapuj základnu")) {
+            world.getCurrentTasks().add("Dostaň se do základny");
             world.getCurrentTasks().add("Zmapuj základnu");
             ((MapItem) world.getItem("item_baseMap")).getMappedRoomsID().add("room_commanderRoom");
         }
@@ -234,11 +242,11 @@ public class Game {
             return;
         }
         if (gameState == 1 && !world.getCharacter("character_rudaGuard").isMandatoryTalk()) {
+            world.getCurrentTasks().remove("Dostaň se do základny");
             if (commandReturn.equals("0")) {
                 world.setGameState(2);
                 world.moveCharacter("character_rudaGuard", "room_checkpoint");
                 world.getCurrentTasks().add("Najdi Rudovu knihu");
-                world.getFutureTasks().remove("Najdi Rudovu knihu");
                 world.setStartTime(world.getTime());
                 world.getRoom("room_bathroom").getItemsID().add("item_rudaBook");
                 return;
@@ -255,11 +263,16 @@ public class Game {
             }
             world.setGameState(3);
             world.getCurrentTasks().removeFirst();
+            world.getCurrentTasks().remove("Najdi Rudovu knihu");
             world.getRoom("room_kitchen").getItemsID().add("item_trashBag");
             return;
         }
         if (gameState == 3 && commandReturn.equals("11")) {
             world.getItem("item_trashBag").setState(2);
+            world.getCurrentTasks().add("Vynes pytel s odpadky");
+        }
+        if (commandReturn.equals("28")) {
+            world.getCurrentTasks().remove("Vynes pytel s odpadky");
         }
         if (gameState == 3 && commandReturn.equals("10")) {
             world.getPlayer().setSuspiciousness(world.getPlayer().getSuspiciousness() + 1);
@@ -267,6 +280,7 @@ public class Game {
         if (world.getPlayer().getSuspiciousness() >= 2) {
             ArrayList<String> newEndCommand = new ArrayList<>();
             newEndCommand.add("konec");
+            System.out.println("Agent Martin Starý se choval moc podezřele a byl kvůli tomu odhalen, jeho mise tak skončila neúspěchem.");
             executeCommand(newEndCommand);
         }
         if (commandReturn.equals("4")) {
@@ -280,24 +294,24 @@ public class Game {
         if (world.getPlayer().getInventoryID().contains("item_baseMap") && ((MapItem) world.getItem("item_baseMap")).getMappedRoomsID().containsAll(world.getRoomsID())) {
             world.getCurrentTasks().remove("Zmapuj základnu");
             world.getCurrentTasks().add("Dostaň mapu k tajné službě");
-            world.getFutureTasks().remove("Dostaň mapu k tajné službě");
             (world.getItem("item_baseMap")).setState(4); //state 4 == the map is full
         }
         if (commandReturn.equals("5")) {
             world.setGameState(4);
+            world.getCurrentTasks().remove("Dostaň mapu k tajné službě");
+            world.getCurrentTasks().add("Vyčkej na signál od tajné služby");
         }
         if (commandReturn.equals("8") && world.getGameState() == 4) {
             System.out.println("Když jsi spal na chvíli tě vzbudil zvuk houkaček projíždějících okolo, myslel sis že to je náhoda, ale když se to po hodině zopakovalo věděl jsi že ne.");
             world.moveCharacter("character_tomasGuard", "room_street");
+            world.getCurrentTasks().remove("Vyčkej na signál od tajné služby");
+            world.getCurrentTasks().add("Zatkni velitele odboje");
         }
         if (world.getPlayer().getSuspiciousness() < 1 && world.getRoom("room_street").getCharactersID().contains("character_tomasGuard")) { //ruda trusts player
             world.setGameState(5);
         }
         if (world.getPlayer().getSuspiciousness() >= 1 && world.getRoom("room_street").getCharactersID().contains("character_tomasGuard")) { //ruda doesn't trust player
             world.setGameState(6);
-        }
-        if (commandReturn.equals("6")) {
-
         }
         if (commandReturn.equals("7")) {
             world.getCurrentRoom().getCharactersID().remove("character_rudaGuard");
@@ -309,6 +323,7 @@ public class Game {
         }
         if (world.getCurrentRoom().getId().equals("room_commanderRoom")) {
             System.out.println("Úspěšně jsi zatkl velitele odboje a přivolal na základnu razii, agent Martin Starý byl prezidentem vyznamenán a navždy bude považován za hrdinu!");
+            world.getCurrentTasks().remove("Zatkni velitele odboje");
             world.setGameState(7);
             ArrayList<String> newEndCommand = new ArrayList<>();
             newEndCommand.add("konec");
@@ -316,6 +331,7 @@ public class Game {
         }
         if (gameState == 7) {
             System.out.println("Úspěšně jsi zatkl velitele odboje a přivolal na základnu razii, agent Martin Starý byl prezidentem vyznamenán a navždy bude považován za hrdinu!");
+            world.getCurrentTasks().remove("Zatkni velitele odboje");
             world.setGameState(7);
             ArrayList<String> newEndCommand = new ArrayList<>();
             newEndCommand.add("konec");
@@ -334,11 +350,6 @@ public class Game {
             //not be met if the method returns true, which it only does after a valid input,
             //that is the reason why the statement has empty body
         }
-
-        //System.out.println(world); //temporary test to see if world loaded properly
-        //world.getCharacter("character_tunnelGuard").setMandatoryTalk(false); //temp
-        //world.getCharacter("character_rudaGuard").setMandatoryTalk(false); //temp
-        //world.getPlayer().getInventoryID().add("item_trashBag"); //temp
 
         while (!this.world.isEnd()) {
             System.out.println("\n=====================================================================================================================");

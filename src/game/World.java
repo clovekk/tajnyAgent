@@ -5,6 +5,7 @@ import Commands.*;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class serves as the main game world and contains all the game data
@@ -452,6 +453,18 @@ public class World {
             itemNames.add(this.getItem(this.player.getInventoryID().get(i)).getName());
         }
         return itemNames;
+    }
+
+    public ArrayList<String> getMappedRoomNames() {
+        ArrayList<String> roomNames = new ArrayList<>();
+        if (player.getInventoryID().contains("item_baseMap")) {
+            MapItem baseMap = (MapItem) this.getItem("item_baseMap");
+            for (int i = 0; i < baseMap.getMappedRoomsID().size(); i++) {
+                roomNames.add(this.getRoom(baseMap.getMappedRoomsID().get(i)).getName());
+            }
+        }
+        roomNames.remove("Pokoj velitele");
+        return roomNames;
     }
 
     @Override

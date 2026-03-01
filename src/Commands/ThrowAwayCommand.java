@@ -26,10 +26,19 @@ public class ThrowAwayCommand implements Command {
                 world.getItem("item_trashBag").setDeletable(true);
                 return "5";
             }
+            if (world.getItemByCompatibleName(itemName).getId().equals("item_trashBag")) {
+                if (world.getCurrentRoom().getId().equals("room_street")) {
+                    world.getPlayer().getInventoryID().remove(world.getItemByCompatibleName(itemName).getId());
+                    System.out.println("Zahodil jsi předmět " + world.getItemByCompatibleName(itemName).getName());
+                    return "28";
+                } else {
+                    System.out.println("Odpadky musíš vyhodit do popelnice");
+                }
+            }
             if (world.getItemByCompatibleName(itemName).isDeletable()) {
                 world.getPlayer().getInventoryID().remove(world.getItemByCompatibleName(itemName).getId());
                 world.getItems().remove(world.getItemByCompatibleName(itemName));
-                System.out.println("Zahodil jsi předmět");
+                System.out.println("Zahodil jsi předmět " + world.getItemByCompatibleName(itemName).getName());
             } else {
                 System.out.println("Tento předmět nemůžeš zahodit");
             }

@@ -21,6 +21,7 @@ public class MapOutCommand implements Command {
             MapItem baseMap = (MapItem) world.getItem("item_baseMap");
             if (!baseMap.getMappedRoomsID().contains(world.getCurrentRoom().getId())) {
                 baseMap.getMappedRoomsID().add(world.getCurrentRoom().getId());
+                System.out.println("Zakreslil jsi do mapy tuto místnost");
             } else {
                 System.out.println("Tuto místnost jsi již do mapy zakreslil");
             }

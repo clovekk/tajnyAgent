@@ -49,11 +49,13 @@ public class SavedGameData {
      * @param filePath path to the save file
      * @return all the data loaded from the save file
      */
-    public static SavedGameData loadGameData(Path filePath) {
+    public static SavedGameData loadGameData(Path filePath) throws IOException {
         Gson gson = new Gson();
 
         try (Reader r = Files.newBufferedReader(filePath, StandardCharsets.UTF_8)) {
             return gson.fromJson(r, SavedGameData.class);
+        } catch (IOException e) {
+            throw new IOException("Načítaný soubor neexistuje");
         } catch (Exception e) {
             throw new RuntimeException("Chyba při načítání JSON: " + e.getMessage());
         }

@@ -19,19 +19,26 @@ public class UseCommand implements Command {
 
     @Override
     public String execute() {
-        if (world.getPlayer().hasItem(world.getItemByCompatibleName(itemName))) {
-            if (world.getCurrentRoom().getId().equals("room_checkpoint") && world.getItemByCompatibleName(itemName).getId().equals("item_pistolGun")) {
-                System.out.println("Zastřelil jsi Rudu a nyní je vchod k veliteli nechráněn");
-                return "7";
-            }
-            if (world.getItemByCompatibleName(itemName).getState() != 3) { //state 3 = used
-                world.getItemByCompatibleName(itemName).setState(3);
-                System.out.println(world.getItemByCompatibleName(itemName).getUseText());
-            } else {
-                System.out.println("Tento předmět jsi již použil");
-            }
+        if (!world.itemWithCompatibleNameExists(itemName)) {
+            System.out.println("Neplatný název předmětu");
         } else {
-            System.out.println("Tento předmět nemáš");
+            if (world.getPlayer().hasItem(world.getItemByCompatibleName(itemName))) {
+                if (world.getCurrentRoom().getId().equals("room_checkpoint") && world.getItemByCompatibleName(itemName).getId().equals("item_pistolGun")) {
+                    System.out.println("Zastřelil jsi Rudu a nyní je vchod k veliteli nechráněn");
+                    return "7";
+                }
+                if (world.getItemByCompatibleName(itemName).getId().equals("item_baseMap")) {
+                    System.out.println("Seznam zmapovaných místností: " + world.getMappedRoomNames());
+                }
+                if (world.getItemByCompatibleName(itemName).getState() != 3) { //state 3 = used
+                    world.getItemByCompatibleName(itemName).setState(3);
+                    System.out.println(world.getItemByCompatibleName(itemName).getUseText());
+                } else {
+                    System.out.println("Tento předmět jsi již použil");
+                }
+            } else {
+                System.out.println("Tento předmět nemáš");
+            }
         }
         return "";
     }

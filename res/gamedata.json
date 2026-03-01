@@ -170,13 +170,16 @@
     }
   ],
   "futureTasks": [
-    "Zmapuj základnu",
-    "Najdi Rudovu knihu",
-    "Dostaň mapu k tajné službě"
+    "deprecated-unused"
   ],
   "hints": [
-    "h1",
-    "h2",
-    "h3"
+    "Zkus si promluvit s hlídačem",
+    "Zkus si promluvit s hlídačem Rudou",
+    "Zkus prohledat koupelnu",
+    "Zkus si promluvit s kuchařem Pepou, třeba by tě mohl nechat vynést na ulici odpadky",
+    "Zkus se prospat než příjde signál od tajné služby",
+    "Zkus Rudu přemluvit ať opustí místnost s hlídači",
+    "Ruda ti moc nevěří, zkus se ve skladu podívat jestli by tam nebylo něco co bys mohl použít",
+    "Zkus veliteli nasadit pouta"
   ]
 }
